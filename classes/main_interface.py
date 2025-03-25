@@ -2,6 +2,8 @@ from PyQt6.QtGui import QPixmap
 from PyQt6.QtWidgets import QWidget, QPushButton, QVBoxLayout, QHBoxLayout, QLineEdit, QLabel
 
 from classes.imagepp import ImagePP
+from classes.save import Save
+from enums.status import Status
 
 
 class MainInterface(QWidget):
@@ -16,6 +18,9 @@ class MainInterface(QWidget):
 
         self.picture_lbl = QLabel()
 
+        self.status_lbl = QLabel()
+        self.status_lbl.setText(Status(Save.get_status()).name)
+
         self.vbox = QVBoxLayout()
         self.hbox = QHBoxLayout()
 
@@ -27,6 +32,7 @@ class MainInterface(QWidget):
         self.picture_lbl.show()
         self.picture_lbl.setScaledContents(True)
 
+        self.vbox.addWidget(self.status_lbl)
         self.vbox.addWidget(self.open_file_btn)
         self.hbox.addWidget(self.id_le)
         self.hbox.addWidget(self.open_id_btn)
