@@ -1,6 +1,8 @@
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QWidget, QLabel, QVBoxLayout, QHBoxLayout, QGridLayout, QPushButton, QSizePolicy
 
+from gui.picture_info import PictureInfo
+
 
 class PixelsInfo(QWidget):
 
@@ -15,6 +17,8 @@ class PixelsInfo(QWidget):
         self.left_info_lbl = QLabel()
         self.left_value_lbl = QLabel()
 
+        self.picture_window = PictureInfo()
+
         self.hbox = QHBoxLayout()
         self.grid = QGridLayout()
         self.vbox = QVBoxLayout()
@@ -25,7 +29,9 @@ class PixelsInfo(QWidget):
         self.setStyleSheet("background-color:gray")
 
         self.open_picture_btn.setText("Open picture")
-        self.change_picture_btn.setText("Change picture")
+        self.open_picture_btn.clicked.connect(self.open_picture)
+
+        self.change_picture_btn.setText("Add picture")
 
         self.painted_info_lbl.setText("Painter pixels:")
         self.painted_value_lbl.setText("0 (hard)")
@@ -45,3 +51,6 @@ class PixelsInfo(QWidget):
 
         self.setLayout(self.vbox)
         self.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
+
+    def open_picture(self):
+        self.picture_window.show()
