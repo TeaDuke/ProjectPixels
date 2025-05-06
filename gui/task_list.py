@@ -2,6 +2,7 @@ from PyQt6.QtGui import QPalette, QColor
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QHBoxLayout, QGridLayout, QPushButton, QSizePolicy
 from PyQt6.QtCore import Qt
 
+from gui.task_creator import TaskCreator
 from utilits.palette_utilit import get_palette
 
 listBtn = ["work-out", "read", "pray", "no sugar", "japan"]
@@ -14,6 +15,8 @@ class TaskList(QWidget):
 
         self.add_btn = QPushButton()
 
+        self.task_creator = TaskCreator()
+
         self.hbox = QHBoxLayout()
         self.grid = QGridLayout()
         self.vbox = QVBoxLayout()
@@ -25,6 +28,7 @@ class TaskList(QWidget):
         self.setPalette(get_palette(217,217,217))
 
         self.add_btn.setText("Add XXXX")
+        self.add_btn.clicked.connect(self.open_task_creator)
 
         self.hbox.addWidget(self.add_btn)
         self.hbox.setAlignment(Qt.AlignmentFlag.AlignRight)
@@ -48,3 +52,6 @@ class TaskList(QWidget):
             qbtn = QPushButton(btn)
             self.grid.addWidget(qbtn, place//2, place%2)
             place += 1
+
+    def open_task_creator(self):
+        self.task_creator.show()
