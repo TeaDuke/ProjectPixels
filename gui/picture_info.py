@@ -10,16 +10,16 @@ class PictureInfo(QWidget):
         self.picture = QLabel()
         self.pixmap = QPixmap('.\\data\\ghibli.jpg')
 
-        self.painted_info_lbl = QLabel()
-        self.painted_value_lbl = QLabel()
-        self.left_info_lbl = QLabel()
-        self.left_value_lbl = QLabel()
-        self.all_info_lbl = QLabel()
-        self.all_value_lbl = QLabel()
+        self.painted_info_lbl = QLabel(self)
+        self.painted_value_lbl = QLabel(self)
+        self.left_info_lbl = QLabel(self)
+        self.left_value_lbl = QLabel(self)
+        self.all_info_lbl = QLabel(self)
+        self.all_value_lbl = QLabel(self)
 
-        self.grid = QGridLayout()
+        self.grid = QGridLayout(self)
 
-        self.vbox = QVBoxLayout()
+        self.vbox = QVBoxLayout(self)
 
         self._settings()
 

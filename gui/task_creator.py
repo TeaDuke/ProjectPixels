@@ -1,26 +1,31 @@
+from PyQt6.QtCore import pyqtSignal
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QGridLayout, QLineEdit, QHBoxLayout, QPushButton
+
+from data_classes.Task import Task
+from services.task_main_service import TaskMainService
 
 
 class TaskCreator(QWidget):
+    task_created = pyqtSignal()
 
     def __init__(self):
         super().__init__()
 
-        self.title_lbl = QLabel()
+        self.title_lbl = QLabel(self)
 
-        self.name_info_lbl = QLabel()
-        self.name_value_le = QLineEdit()
-        self.price_info_lbl = QLabel()
-        self.price_value_le = QLineEdit()
+        self.name_info_lbl = QLabel(self)
+        self.name_value_le = QLineEdit(self)
+        self.price_info_lbl = QLabel(self)
+        self.price_value_le = QLineEdit(self)
 
-        self.create_btn = QPushButton()
-        self.cancel_btn = QPushButton()
+        self.create_btn = QPushButton(self)
+        self.cancel_btn = QPushButton(self)
 
-        self.grid = QGridLayout()
+        self.grid = QGridLayout(self)
 
-        self.hbox = QHBoxLayout()
+        self.hbox = QHBoxLayout(self)
 
-        self.vbox = QVBoxLayout()
+        self.vbox = QVBoxLayout(self)
 
         self._settings()
 
@@ -31,6 +36,7 @@ class TaskCreator(QWidget):
         self.price_info_lbl.setText("Price (in pixels):")
 
         self.create_btn.setText("Create")
+        self.create_btn.clicked.connect(self._addTask)
         self.cancel_btn.setText("Cancel")
         self.cancel_btn.clicked.connect(self.close)
 
@@ -48,3 +54,12 @@ class TaskCreator(QWidget):
 
         self.setLayout(self.vbox)
 
+    def _addTask(self):
+        task = Task(self.name_value_le.text(), self.price_value_le.text())
+        TaskMainService.addTask(task)
+        self.task_created.emit()
+
+    def closeEvent(self, event):
+        self.name_value_le.clear()
+        self.price_value_le.clear()
+        event.accept()
