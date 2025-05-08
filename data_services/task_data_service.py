@@ -3,14 +3,13 @@ import pickle
 
 from data_classes.Task import Task
 
-
 class TaskDataService:
 
     @staticmethod
     def getTasks(save_title):
         with open(f"data\\{save_title}\\tasks.json", 'r', encoding='utf-8') as f:
-            loaded_tasks = json.load(f)
-        tasks = [Task.from_dict(t) for t in loaded_tasks['tasks']]
+            tasks_json = json.load(f)
+        tasks = [Task.from_dict(t) for t in tasks_json['tasks']]
         return tasks
 
     @staticmethod

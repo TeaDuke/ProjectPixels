@@ -4,23 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d03fced-13b4-4431-b900-ce0971b747de" name="Changes" comment="Update GUI, task creator">
-      <change afterPath="$PROJECT_DIR$/data/Hollow/pictures/1/d-1.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/Hollow/pictures/1/i-1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/Hollow/save.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/Hollow/tasks.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data_classes/Task.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data_services/task_data_service.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/task_main_service.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utilits/json_utilit.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utilits/layout_utilit.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utilits/tasks.json" afterDir="false" />
+    <list default="true" id="6d03fced-13b4-4431-b900-ce0971b747de" name="Changes" comment="Add json files configs, task logic (list from json and add new tasks)">
+      <change afterPath="$PROJECT_DIR$/data/base.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data_classes/Base.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data_classes/Picture.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data_classes/Save.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data_services/base_data_service.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data_services/picture_data_service.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data_services/save_data_service.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/main_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/main_window.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/picture_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/picture_info.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/pixels_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/pixels_info.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/task_creator.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/task_creator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/task_list.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/task_list.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/Hollow/pictures/1/d-1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/Hollow/pictures/1/d-1.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/Hollow/save.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/Hollow/save.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_services/task_data_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_services/task_data_service.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,22 +42,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.json_utilit.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.main_window.executor": "Run",
-    "Python.pickle_utilit.executor": "Run",
-    "Python.start.executor": "Run",
-    "Python.task_list.executor": "Run",
-    "Python.test.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/maxch/Documents/projects/ProjectPixels/data/Hollow",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.json_utilit.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main_window.executor&quot;: &quot;Run&quot;,
+    &quot;Python.pickle_utilit.executor&quot;: &quot;Run&quot;,
+    &quot;Python.start.executor&quot;: &quot;Run&quot;,
+    &quot;Python.task_list.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/maxch/Documents/projects/ProjectPixels/data/Hollow&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\maxch\Documents\projects\ProjectPixels\data\Hollow" />
@@ -143,13 +138,22 @@
       <option name="project" value="LOCAL" />
       <updated>1746545481234</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Add json files configs, task logic (list from json and add new tasks)">
+      <option name="closed" value="true" />
+      <created>1746632632358</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1746632632358</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="GUI, main page" />
     <MESSAGE value="GUI, picture info window, btn logic" />
     <MESSAGE value="Update GUI, task creator" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update GUI, task creator" />
+    <MESSAGE value="Add json files configs, task logic (list from json and add new tasks)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add json files configs, task logic (list from json and add new tasks)" />
   </component>
 </project>
