@@ -11,21 +11,21 @@ class TaskCreator(QWidget):
     def __init__(self):
         super().__init__()
 
-        self.title_lbl = QLabel(self)
+        self.title_lbl = QLabel()
 
-        self.name_info_lbl = QLabel(self)
-        self.name_value_le = QLineEdit(self)
-        self.price_info_lbl = QLabel(self)
-        self.price_value_le = QLineEdit(self)
+        self.name_info_lbl = QLabel()
+        self.name_value_le = QLineEdit()
+        self.price_info_lbl = QLabel()
+        self.price_value_le = QLineEdit()
 
-        self.create_btn = QPushButton(self)
-        self.cancel_btn = QPushButton(self)
+        self.create_btn = QPushButton()
+        self.cancel_btn = QPushButton()
 
-        self.grid = QGridLayout(self)
+        self.grid = QGridLayout()
 
-        self.hbox = QHBoxLayout(self)
+        self.hbox = QHBoxLayout()
 
-        self.vbox = QVBoxLayout(self)
+        self.vbox = QVBoxLayout()
 
         self._settings()
 

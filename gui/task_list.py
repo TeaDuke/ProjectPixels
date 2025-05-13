@@ -1,8 +1,10 @@
-from PyQt6.QtGui import QPalette, QColor
+from PyQt6.QtGui import QPalette, QColor, QImage
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QHBoxLayout, QGridLayout, QPushButton, QSizePolicy
 from PyQt6.QtCore import Qt
 
+from data_services.picture_data_service import PictureDataService
 from gui.task_creator import TaskCreator
+from services.picture_main_service import PictureMainService
 from services.task_main_service import TaskMainService
 from utilits.palette_utilit import get_palette
 from utilits.layout_utilit import clear_layout
@@ -12,17 +14,17 @@ class TaskList(QWidget):
 
     def __init__(self):
         super().__init__()
-        self.container = QWidget(self)
+        self.container = QWidget()
 
-        self.save_btn = QPushButton(self)
-        self.add_btn = QPushButton(self)
+        self.save_btn = QPushButton()
+        self.add_btn = QPushButton()
 
         self.task_creator = TaskCreator()
         self.task_creator.task_created.connect(self._create_buttons)
 
-        self.hbox = QHBoxLayout(self)
-        self.grid = QGridLayout(self)
-        self.vbox = QVBoxLayout(self)
+        self.hbox = QHBoxLayout()
+        self.grid = QGridLayout()
+        self.vbox = QVBoxLayout()
         self._settings()
 
     def _settings(self):
@@ -31,6 +33,7 @@ class TaskList(QWidget):
         self.setPalette(get_palette(217,217,217))
 
         self.save_btn.setText("Save tasks")
+        self.save_btn.clicked.connect(self.save_tasks)
         self.add_btn.setText("Add XXXX")
         self.add_btn.clicked.connect(self.open_task_creator)
 
@@ -61,3 +64,6 @@ class TaskList(QWidget):
 
     def open_task_creator(self):
         self.task_creator.show()
+
+    def save_tasks(self):
+        PictureMainService.open_pixels(322)

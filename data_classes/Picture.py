@@ -5,7 +5,7 @@ class Picture:
         self.id = 0
         self.height = 0
         self.width = 0
-        self.closed_pixels = []
+        self.opened_pixels = 0
 
     @property
     def all_pixels(self):
@@ -17,7 +17,7 @@ class Picture:
             "id": self.id,
             "height": self.height,
             "width": self.width,
-            "closed_pixels": self.closed_pixels
+            "opened_pixels": self.opened_pixels
         }
 
     @staticmethod
@@ -27,5 +27,5 @@ class Picture:
         picture.id = data.get('id', 0)
         picture.height = data.get('height', '')
         picture.width = data.get('width', '')
-        picture.closed_pixels = data.get('closed_pixels', [])
+        picture.opened_pixels = data.get('opened_pixels', 0)
         return picture

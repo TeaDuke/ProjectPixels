@@ -15,7 +15,7 @@ class MainWindow(QWidget):
         self.pxinfo = PixelsInfo()
         self.tasklist = TaskList()
 
-        self.vbox = QVBoxLayout(self)
+        self.vbox = QVBoxLayout()
 
         self._settings()
 

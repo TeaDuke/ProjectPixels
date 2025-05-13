@@ -9,19 +9,19 @@ class PixelsInfo(QWidget):
     def __init__(self):
         super().__init__()
 
-        self.open_picture_btn = QPushButton(self)
-        self.change_picture_btn = QPushButton(self)
+        self.open_picture_btn = QPushButton()
+        self.change_picture_btn = QPushButton()
 
-        self.painted_info_lbl = QLabel(self)
-        self.painted_value_lbl = QLabel(self)
-        self.left_info_lbl = QLabel(self)
-        self.left_value_lbl = QLabel(self)
+        self.painted_info_lbl = QLabel()
+        self.painted_value_lbl = QLabel()
+        self.left_info_lbl = QLabel()
+        self.left_value_lbl = QLabel()
 
-        self.picture_window = PictureInfo(self)
+        self.picture_window = PictureInfo()
 
-        self.hbox = QHBoxLayout(self)
-        self.grid = QGridLayout(self)
-        self.vbox = QVBoxLayout(self)
+        self.hbox = QHBoxLayout()
+        self.grid = QGridLayout()
+        self.vbox = QVBoxLayout()
         self._settings()
 
     def _settings(self):
