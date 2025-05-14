@@ -4,25 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d03fced-13b4-4431-b900-ce0971b747de" name="Changes" comment="create many data classes and services">
-      <change afterPath="$PROJECT_DIR$/data/Hollow/pictures/1/p-1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/log.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/log1.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/picture_main_service.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utilits/ghibli.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utilits/ppicture_utilit.py" afterDir="false" />
+    <list default="true" id="6d03fced-13b4-4431-b900-ce0971b747de" name="Changes" comment="open logic (it works finally))))))&#10;and other things">
+      <change afterPath="$PROJECT_DIR$/gui/badge_button.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/Hollow/pictures/1/d-1.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/Hollow/pictures/1/d-1.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/Hollow/pictures/1/p-1.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/Hollow/pictures/1/p-1.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/Hollow/tasks.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/Hollow/tasks.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_classes/Picture.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_classes/Picture.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_services/picture_data_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_services/picture_data_service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/main_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/main_window.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/picture_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/picture_info.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/pixels_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/pixels_info.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/task_creator.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/task_creator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_classes/Task.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_classes/Task.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui/task_list.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/task_list.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/task_main_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/services/task_main_service.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +46,7 @@
     "Python.pickle_utilit.executor": "Run",
     "Python.picture_data_service.executor": "Debug",
     "Python.ppicture_utilit.executor": "Run",
-    "Python.start.executor": "Run",
+    "Python.start.executor": "Debug",
     "Python.task_list.executor": "Run",
     "Python.test.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -165,7 +154,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746731754224</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="open logic (it works finally))))))&#10;and other things">
+      <option name="closed" value="true" />
+      <created>1747149129121</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1747149129121</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -174,6 +171,25 @@
     <MESSAGE value="Update GUI, task creator" />
     <MESSAGE value="Add json files configs, task logic (list from json and add new tasks)" />
     <MESSAGE value="create many data classes and services" />
-    <option name="LAST_COMMIT_MESSAGE" value="create many data classes and services" />
+    <MESSAGE value="open logic (it works finally))))))&#10;and other things" />
+    <option name="LAST_COMMIT_MESSAGE" value="open logic (it works finally))))))&#10;and other things" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/gui/task_list.py</url>
+          <line>85</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="PythonConfigurationType">
+        <watch expression="self.buttons" />
+        <watch expression="self.tasks" />
+        <watch expression="self.finished_tasks" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

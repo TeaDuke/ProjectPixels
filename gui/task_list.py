@@ -2,7 +2,9 @@ from PyQt6.QtGui import QPalette, QColor, QImage
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QHBoxLayout, QGridLayout, QPushButton, QSizePolicy
 from PyQt6.QtCore import Qt
 
+from data_classes.Task import Task
 from data_services.picture_data_service import PictureDataService
+from gui.badge_button import BadgeButton
 from gui.task_creator import TaskCreator
 from services.picture_main_service import PictureMainService
 from services.task_main_service import TaskMainService
@@ -10,10 +12,14 @@ from utilits.palette_utilit import get_palette
 from utilits.layout_utilit import clear_layout
 
 class TaskList(QWidget):
+    tasks = []
     place = 0
+    buttons = []
 
     def __init__(self):
         super().__init__()
+        self.finished_tasks = {}
+
         self.container = QWidget()
 
         self.save_btn = QPushButton()
@@ -54,16 +60,33 @@ class TaskList(QWidget):
         self.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
 
     def _create_buttons(self):
-        tasks = TaskMainService.getTasks()
+        self.tasks = TaskMainService.getTasks()
         st = self.place
-        for i in range(st, len(tasks)):
-            qbtn = QPushButton(f"{tasks[i].name} ({tasks[i].price})")
-            self.grid.addWidget(qbtn, self.place // 2, self.place % 2)
+        for i in range(st, len(self.tasks)):
+            self.buttons.append(BadgeButton(f"{self.tasks[i].name}"))
+            self.buttons[self.place].clicked.connect(self.finish_task)
+            self.grid.addWidget(self.buttons[self.place], self.place // 2, self.place % 2)
             self.place += 1
         self.grid.update()
 
     def open_task_creator(self):
         self.task_creator.show()
 
+    def finish_task(self):
+        name = self.sender().text()
+        if name not in self.finished_tasks:
+            self.finished_tasks[name] = 0
+        self.finished_tasks[name] += 1
+
+    def _find_task_index_by_name(self, name):
+        return self.tasks.index(Task(name, 0))
+
     def save_tasks(self):
-        PictureMainService.open_pixels(322)
+        number = 0
+        for name in self.finished_tasks:
+            index = self._find_task_index_by_name(name)
+            number += self.tasks[index].price * self.finished_tasks[name]
+            self.buttons[index].clear_badge_number()
+        # self.save_btn.setText(str(number))
+        self.finished_tasks = {}
+        PictureMainService.open_pixels(number)

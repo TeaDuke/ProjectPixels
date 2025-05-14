@@ -30,7 +30,11 @@
     },
     {
       "name": "wer",
-      "price": "22"
+      "price": 22
+    },
+    {
+      "name": "test",
+      "price": "12"
     }
   ]
 }
