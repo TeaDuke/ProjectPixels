@@ -38,3 +38,15 @@ class PictureMainService:
             col = 0
             if number == 0:
                 break
+
+    @staticmethod
+    def get_picture_info():
+        current_save = BaseDataService.get_current_save()
+        pic_id = SaveDataService.get_current_picture_id(current_save)
+        return PictureDataService.get_picture_info(current_save, pic_id)
+
+    @staticmethod
+    def get_progress_picture():
+        current_save = BaseDataService.get_current_save()
+        pic_id = SaveDataService.get_current_picture_id(current_save)
+        return PictureDataService.get_progress_picture(current_save, pic_id)

@@ -2,6 +2,7 @@ from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QWidget, QLabel, QVBoxLayout, QHBoxLayout, QGridLayout, QPushButton, QSizePolicy
 
 from gui.picture_info import PictureInfo
+from services.picture_main_service import PictureMainService
 
 
 class PixelsInfo(QWidget):
@@ -12,8 +13,8 @@ class PixelsInfo(QWidget):
         self.open_picture_btn = QPushButton()
         self.change_picture_btn = QPushButton()
 
-        self.painted_info_lbl = QLabel()
-        self.painted_value_lbl = QLabel()
+        self.opened_info_lbl = QLabel()
+        self.opened_value_lbl = QLabel()
         self.left_info_lbl = QLabel()
         self.left_value_lbl = QLabel()
 
@@ -33,16 +34,15 @@ class PixelsInfo(QWidget):
 
         self.change_picture_btn.setText("Add picture")
 
-        self.painted_info_lbl.setText("Painter pixels:")
-        self.painted_value_lbl.setText("0 (hard)")
+        self.opened_info_lbl.setText("Painter pixels:")
         self.left_info_lbl.setText("Left pixels:")
-        self.left_value_lbl.setText("10 (hard)")
+        self.update_pixels_info()
 
         self.hbox.addWidget(self.open_picture_btn)
         self.hbox.addWidget(self.change_picture_btn)
 
-        self.grid.addWidget(self.painted_info_lbl, 0, 0)
-        self.grid.addWidget(self.painted_value_lbl, 0, 1)
+        self.grid.addWidget(self.opened_info_lbl, 0, 0)
+        self.grid.addWidget(self.opened_value_lbl, 0, 1)
         self.grid.addWidget(self.left_info_lbl, 1, 0)
         self.grid.addWidget(self.left_value_lbl, 1, 1)
 
@@ -54,3 +54,12 @@ class PixelsInfo(QWidget):
 
     def open_picture(self):
         self.picture_window.show()
+
+    def update_pixels_info(self):
+        pic_info = PictureMainService.get_picture_info()
+        self.opened_value_lbl.setText(f"{pic_info.opened_pixels}")
+        left_pixels = pic_info.height * pic_info.width - pic_info.opened_pixels
+        self.left_value_lbl.setText(f"{left_pixels}")
+
+        self.picture_window.update_progress_picture()
+        self.picture_window.update_pixels_info()

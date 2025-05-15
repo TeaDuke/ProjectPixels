@@ -14,6 +14,7 @@ class MainWindow(QWidget):
         # declare widgets
         self.pxinfo = PixelsInfo()
         self.tasklist = TaskList()
+        self.tasklist.tasks_saved.connect(self.update_pixels_info)
 
         self.vbox = QVBoxLayout()
 
@@ -27,3 +28,6 @@ class MainWindow(QWidget):
         self.vbox.setAlignment(Qt.AlignmentFlag.AlignTop)
 
         self.setLayout(self.vbox)
+
+    def update_pixels_info(self):
+        self.pxinfo.update_pixels_info()

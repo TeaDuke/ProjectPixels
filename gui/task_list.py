@@ -1,6 +1,6 @@
 from PyQt6.QtGui import QPalette, QColor, QImage
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QHBoxLayout, QGridLayout, QPushButton, QSizePolicy
-from PyQt6.QtCore import Qt
+from PyQt6.QtCore import Qt, pyqtSignal
 
 from data_classes.Task import Task
 from data_services.picture_data_service import PictureDataService
@@ -15,6 +15,8 @@ class TaskList(QWidget):
     tasks = []
     place = 0
     buttons = []
+
+    tasks_saved = pyqtSignal()
 
     def __init__(self):
         super().__init__()
@@ -90,3 +92,4 @@ class TaskList(QWidget):
         # self.save_btn.setText(str(number))
         self.finished_tasks = {}
         PictureMainService.open_pixels(number)
+        self.tasks_saved.emit()
