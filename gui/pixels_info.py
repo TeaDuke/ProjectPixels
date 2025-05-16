@@ -58,7 +58,7 @@ class PixelsInfo(QWidget):
     def update_pixels_info(self):
         pic_info = PictureMainService.get_picture_info()
         self.opened_value_lbl.setText(f"{pic_info.opened_pixels}")
-        left_pixels = pic_info.height * pic_info.width - pic_info.opened_pixels
+        left_pixels = pic_info.all_pixels - pic_info.opened_pixels
         self.left_value_lbl.setText(f"{left_pixels}")
 
         self.picture_window.update_progress_picture()

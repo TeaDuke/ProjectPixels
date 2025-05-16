@@ -1,4 +1,8 @@
+import random
 from numbers import Number
+
+import numpy
+from PyQt6.QtGui import QImage
 
 from data_classes.Picture import Picture
 from data_services.base_data_service import BaseDataService
@@ -22,13 +26,14 @@ class PictureMainService:
 
     @staticmethod
     def _open_pixels_logic(number, ppic, pic_info: Picture): #TODO: check work of this function
-        row = pic_info.opened_pixels // pic_info.width
-        col = pic_info.opened_pixels % pic_info.width
+        row = pic_info.line_position // pic_info.width
+        col = pic_info.line_position % pic_info.width
         for r in range(row, pic_info.height):
             for c in range(col, pic_info.width):
-                with open('services\\log1.txt', 'a', encoding='utf-8') as f:
-                    f.write(f"r - {r}, c - {c}, number - {number}")
+                pic_info.line_position += 1
                 color = ppic.pixelColor(c, r)
+                if color.alpha() == 255:
+                    continue
                 color.setAlpha(255)
                 ppic.setPixelColor(c, r, color)
                 number -= 1
@@ -38,6 +43,20 @@ class PictureMainService:
             col = 0
             if number == 0:
                 break
+
+    @staticmethod
+    def _open_pixels_logic_random(number, ppic, pic_info: Picture):
+        buf = ppic.bits()
+        buf.setsize(ppic.sizeInBytes())
+        data = numpy.frombuffer(buf, dtype=numpy.uint8).reshape((pic_info.height, pic_info.width, 4))
+        closed_pixels = list(zip(*numpy.where(data[:,:,3] == 0)))
+        random.shuffle(closed_pixels)
+        while number > 0:
+            y, x = closed_pixels.pop()
+            data[y,x,3] = 255
+            number -= 1
+            pic_info.opened_pixels += 1
+        ppic = QImage(data.data, pic_info.width, pic_info.height, QImage.Format.Format_RGBA8888)
 
     @staticmethod
     def get_picture_info():

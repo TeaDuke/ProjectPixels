@@ -6,6 +6,7 @@ class Picture:
         self.height = 0
         self.width = 0
         self.opened_pixels = 0
+        self.line_position = 0
 
     @property
     def all_pixels(self):
@@ -17,7 +18,8 @@ class Picture:
             "id": self.id,
             "height": self.height,
             "width": self.width,
-            "opened_pixels": self.opened_pixels
+            "opened_pixels": self.opened_pixels,
+            "line_position": self.line_position
         }
 
     @staticmethod
@@ -28,4 +30,5 @@ class Picture:
         picture.height = data.get('height', '')
         picture.width = data.get('width', '')
         picture.opened_pixels = data.get('opened_pixels', 0)
+        picture.line_position = data.get('line_position', 0)
         return picture

@@ -34,7 +34,15 @@
     },
     {
       "name": "test",
-      "price": "12"
+      "price": 12
+    },
+    {
+      "name": "test1000",
+      "price": 1000
+    },
+    {
+      "name": "test10000",
+      "price": 10000
     }
   ]
 }
