@@ -19,13 +19,18 @@ class PictureMainService:
         ppic = PictureDataService.get_progress_picture(current_save, pic_id)
         pic_info = PictureDataService.get_picture_info(current_save, pic_id)
 
-        PictureMainService._open_pixels_logic(number, ppic, pic_info)
+        opening_mode = SaveDataService.get_opening_mode(current_save)
+
+        if opening_mode == 'line':
+            PictureMainService._open_pixels_logic_line(number, ppic, pic_info)
+        elif opening_mode == 'random':
+            PictureMainService._open_pixels_logic_random(number, ppic, pic_info)
 
         PictureDataService.update_picture_info(current_save, pic_id, pic_info)
         PictureDataService.update_progress_picture(current_save, pic_id, ppic)
 
     @staticmethod
-    def _open_pixels_logic(number, ppic, pic_info: Picture): #TODO: check work of this function
+    def _open_pixels_logic_line(number, ppic, pic_info: Picture): #TODO: check work of this function
         row = pic_info.line_position // pic_info.width
         col = pic_info.line_position % pic_info.width
         for r in range(row, pic_info.height):
@@ -51,7 +56,7 @@ class PictureMainService:
         data = numpy.frombuffer(buf, dtype=numpy.uint8).reshape((pic_info.height, pic_info.width, 4))
         closed_pixels = list(zip(*numpy.where(data[:,:,3] == 0)))
         random.shuffle(closed_pixels)
-        while number > 0:
+        while number > 0 and closed_pixels:
             y, x = closed_pixels.pop()
             data[y,x,3] = 255
             number -= 1

@@ -2,7 +2,7 @@ from PyQt6.QtCore import Qt, QSize
 from PyQt6.QtGui import QPixmap, QImage
 from PyQt6.QtWidgets import QWidget, QLabel, QVBoxLayout, QGridLayout, QSizePolicy, QWIDGETSIZE_MAX
 
-from gui.ScalableLabel import ScalableLabel
+from gui.scalable_label import ScalableLabel
 from services.picture_main_service import PictureMainService
 
 

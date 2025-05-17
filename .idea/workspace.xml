@@ -4,14 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d03fced-13b4-4431-b900-ce0971b747de" name="Changes" comment="update pixels and pictures info in gui elements when tasks are saved">
+    <list default="true" id="6d03fced-13b4-4431-b900-ce0971b747de" name="Changes" comment="add random opening. 2 options of open">
+      <change afterPath="$PROJECT_DIR$/gui/settings.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/save_main_service.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/Hollow/pictures/1/d-1.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/Hollow/pictures/1/d-1.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/Hollow/pictures/1/p-1.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/Hollow/pictures/1/p-1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/Hollow/tasks.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/Hollow/tasks.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_classes/Picture.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_classes/Picture.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/Hollow/save.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/Hollow/save.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_classes/Save.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_classes/Save.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_services/save_data_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_services/save_data_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/ScalableLabel.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/scalable_label.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/main_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/main_window.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui/picture_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/picture_info.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/pixels_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/pixels_info.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/services/picture_main_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/services/picture_main_service.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -47,7 +51,7 @@
     "Python.pickle_utilit.executor": "Run",
     "Python.picture_data_service.executor": "Debug",
     "Python.ppicture_utilit.executor": "Run",
-    "Python.start.executor": "Debug",
+    "Python.start.executor": "Run",
     "Python.task_list.executor": "Run",
     "Python.test.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -179,7 +183,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747317932068</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="add random opening. 2 options of open">
+      <option name="closed" value="true" />
+      <created>1747385774206</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1747385774206</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -191,7 +203,8 @@
     <MESSAGE value="open logic (it works finally))))))&#10;and other things" />
     <MESSAGE value="main logic. choose tasks, save them, picture's pixels are opened" />
     <MESSAGE value="update pixels and pictures info in gui elements when tasks are saved" />
-    <option name="LAST_COMMIT_MESSAGE" value="update pixels and pictures info in gui elements when tasks are saved" />
+    <MESSAGE value="add random opening. 2 options of open" />
+    <option name="LAST_COMMIT_MESSAGE" value="add random opening. 2 options of open" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
