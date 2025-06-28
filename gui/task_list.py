@@ -1,20 +1,20 @@
-from PyQt6.QtGui import QPalette, QColor, QImage
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QHBoxLayout, QGridLayout, QPushButton, QSizePolicy
-from PyQt6.QtCore import Qt, pyqtSignal
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QGridLayout, QPushButton, QSizePolicy
+from PyQt6.QtCore import pyqtSignal
 
 from data_classes.Task import Task
-from data_services.picture_data_service import PictureDataService
-from gui.badge_button import BadgeButton
+from gui.custom_widgets.badge_button import BadgeButton
 from gui.task_creator import TaskCreator
 from services.picture_main_service import PictureMainService
 from services.task_main_service import TaskMainService
 from utilits.palette_utilit import get_palette
-from utilits.layout_utilit import clear_layout
+
 
 class TaskList(QWidget):
     tasks = []
     place = 0
     buttons = []
+
+    mode =
 
     tasks_saved = pyqtSignal()
 
@@ -25,6 +25,7 @@ class TaskList(QWidget):
         self.container = QWidget()
 
         self.save_btn = QPushButton()
+        self.change_btn = QPushButton()
         self.add_btn = QPushButton()
 
         self.task_creator = TaskCreator()
@@ -42,6 +43,8 @@ class TaskList(QWidget):
 
         self.save_btn.setText("Save tasks")
         self.save_btn.clicked.connect(self.save_tasks)
+        self.change_btn.setText("Change: Off")
+        self.change_btn.clicked.connect(self.change_tasks)
         self.add_btn.setText("Add XXXX")
         self.add_btn.clicked.connect(self.open_task_creator)
 
@@ -91,5 +94,8 @@ class TaskList(QWidget):
             self.buttons[index].clear_badge_number()
         # self.save_btn.setText(str(number))
         self.finished_tasks = {}
-        PictureMainService.open_pixels(number)
-        self.tasks_saved.emit()
+        if number != 0:
+            PictureMainService.open_pixels(number)
+            self.tasks_saved.emit()
+
+    def change_tasks(self):

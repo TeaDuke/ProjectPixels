@@ -4,19 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d03fced-13b4-4431-b900-ce0971b747de" name="Changes" comment="add random opening. 2 options of open">
-      <change afterPath="$PROJECT_DIR$/gui/settings.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/save_main_service.py" afterDir="false" />
+    <list default="true" id="6d03fced-13b4-4431-b900-ce0971b747de" name="Changes" comment="add settings window. in settings window user can choose opening mode (line, random)">
+      <change afterPath="$PROJECT_DIR$/enums/mode_enum.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/enums/status_enum.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gui/task_changer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/chevron-left.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/chevron-right.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources.qrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utilits/array_utilits.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/Hollow/pictures/1/d-1.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/Hollow/pictures/1/d-1.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/Hollow/pictures/1/p-1.png" beforeDir="false" afterPath="$PROJECT_DIR$/data/Hollow/pictures/1/p-1.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/Hollow/save.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/Hollow/save.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_classes/Picture.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_classes/Picture.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data_classes/Save.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_classes/Save.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_services/picture_data_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_services/picture_data_service.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data_services/save_data_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_services/save_data_service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/ScalableLabel.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/scalable_label.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/main_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/main_window.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/badge_button.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/custom_widgets/badge_button.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui/picture_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/picture_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/pixels_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/pixels_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/scalable_label.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/custom_widgets/scalable_label.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/task_list.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/task_list.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/services/picture_main_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/services/picture_main_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/save_main_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/services/save_main_service.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,31 +53,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.json_utilit.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.main_window.executor": "Run",
-    "Python.pickle_utilit.executor": "Run",
-    "Python.picture_data_service.executor": "Debug",
-    "Python.ppicture_utilit.executor": "Run",
-    "Python.start.executor": "Run",
-    "Python.task_list.executor": "Run",
-    "Python.test.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/maxch/Documents/projects/ProjectPixels/data/Hollow/pictures/1",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.json_utilit.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main_window.executor&quot;: &quot;Run&quot;,
+    &quot;Python.pickle_utilit.executor&quot;: &quot;Run&quot;,
+    &quot;Python.picture_data_service.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.ppicture_utilit.executor&quot;: &quot;Run&quot;,
+    &quot;Python.start.executor&quot;: &quot;Run&quot;,
+    &quot;Python.task_list.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/maxch/Documents/projects/ProjectPixels/images&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\maxch\Documents\projects\ProjectPixels\images" />
       <recent name="C:\Users\maxch\Documents\projects\ProjectPixels\data\Hollow\pictures\1" />
       <recent name="C:\Users\maxch\Documents\projects\ProjectPixels\services" />
       <recent name="C:\Users\maxch\Documents\projects\ProjectPixels\utilits" />
       <recent name="C:\Users\maxch\Documents\projects\ProjectPixels\data\Hollow" />
-      <recent name="C:\Users\maxch\Documents\projects\ProjectPixels\data" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\maxch\Documents\projects\ProjectPixels\gui\custom_widgets" />
     </key>
   </component>
   <component name="RunManager">
@@ -191,7 +204,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747385774206</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="add settings window. in settings window user can choose opening mode (line, random)">
+      <option name="closed" value="true" />
+      <created>1747484726298</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1747484726298</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -204,9 +225,19 @@
     <MESSAGE value="main logic. choose tasks, save them, picture's pixels are opened" />
     <MESSAGE value="update pixels and pictures info in gui elements when tasks are saved" />
     <MESSAGE value="add random opening. 2 options of open" />
-    <option name="LAST_COMMIT_MESSAGE" value="add random opening. 2 options of open" />
+    <MESSAGE value="add settings window. in settings window user can choose opening mode (line, random)" />
+    <option name="LAST_COMMIT_MESSAGE" value="add settings window. in settings window user can choose opening mode (line, random)" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/data_services/save_data_service.py</url>
+          <line>15</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
         <watch expression="self.buttons" />

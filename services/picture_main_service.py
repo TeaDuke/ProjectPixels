@@ -13,7 +13,15 @@ from data_services.save_data_service import SaveDataService
 class PictureMainService:
 
     @staticmethod
+    def add_new_picture(pic_path):
+        current_save = BaseDataService.get_current_save()
+        PictureDataService.add_new_picture(current_save, pic_path)
+
+    @staticmethod
     def open_pixels(number: Number):
+        if number == 0:
+            return
+
         current_save = BaseDataService.get_current_save()
         pic_id = SaveDataService.get_current_picture_id(current_save)
         ppic = PictureDataService.get_progress_picture(current_save, pic_id)
@@ -64,13 +72,17 @@ class PictureMainService:
         ppic = QImage(data.data, pic_info.width, pic_info.height, QImage.Format.Format_RGBA8888)
 
     @staticmethod
-    def get_picture_info():
+    def get_picture_info(pic_id = 0):
         current_save = BaseDataService.get_current_save()
-        pic_id = SaveDataService.get_current_picture_id(current_save)
+        if pic_id == 0:
+            pic_id = SaveDataService.get_current_picture_id(current_save)
         return PictureDataService.get_picture_info(current_save, pic_id)
 
     @staticmethod
-    def get_progress_picture():
+    def get_progress_picture(pic_id = 0):
         current_save = BaseDataService.get_current_save()
-        pic_id = SaveDataService.get_current_picture_id(current_save)
+        if pic_id == 0:
+            pic_id = SaveDataService.get_current_picture_id(current_save)
         return PictureDataService.get_progress_picture(current_save, pic_id)
+
+

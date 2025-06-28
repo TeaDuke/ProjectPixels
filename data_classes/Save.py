@@ -9,7 +9,7 @@ class Save:
     def to_dict(self):
         return {
             "title": self.title,
-            "picture_ids": self.pictures_ids,
+            "pictures_ids": self.pictures_ids,
             "current_picture_id": self.current_picture_id,
             "opening_mode": self.opening_mode
         }

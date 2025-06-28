@@ -1,13 +1,58 @@
 import json
+import shutil
 
 import numpy
 from PIL import Image
 from PyQt6.QtGui import QImage
+from pathlib import Path
 
 from data_classes.Picture import Picture
+from data_services.save_data_service import SaveDataService
+from utilits.array_utilits import get_max_number_from_array
 
 
 class PictureDataService:
+
+    @staticmethod
+    def add_new_picture(save_title, path):
+        ids = SaveDataService.get_picture_ids(save_title)
+        new_id = get_max_number_from_array(ids) + 1
+        ids.append(new_id)
+
+        source = Path(path)
+        folder_path = Path(f"data\\{save_title}\\pictures\\{new_id}")
+        folder_path.mkdir(parents=True, exist_ok=True)
+        image_dst = folder_path / f"i-{new_id}.png"
+        shutil.copy(source, image_dst)
+
+        PictureDataService._create_progress_picture(save_title, new_id)
+        PictureDataService._create_picture_data(save_title, new_id, source.name, folder_path)
+
+        SaveDataService.update_picture_ids(save_title, ids)
+
+    @staticmethod
+    def _create_progress_picture(save_title, new_id):
+        ppic = Image.open(f"data\\{save_title}\\pictures\\{new_id}\\i-{new_id}.png").convert("RGBA")
+
+        data = numpy.array(ppic)
+        data[:,:,3] = 0
+
+        ppic = Image.fromarray(data)
+        ppic.save(f"data\\{save_title}\\pictures\\{new_id}\\p-{new_id}.png")
+
+    @staticmethod
+    def _create_picture_data(save_title, new_id, filename, folder_path):
+        ppic = PictureDataService.get_progress_picture(save_title, new_id)
+
+        pic_info = Picture()
+        pic_info.filename = filename
+        pic_info.id = new_id
+        pic_info.height = ppic.height()
+        pic_info.width = ppic.width()
+
+        data_path = folder_path / f"d-{new_id}.json"
+        data_path.write_text("")
+        PictureDataService.update_picture_info(save_title, new_id, pic_info)
 
     @staticmethod
     def get_picture_info(save_title, p_id):

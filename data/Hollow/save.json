@@ -1,6 +1,11 @@
 {
   "title": "Hollow",
-  "picture_ids": [],
-  "current_picture_id": 1,
+  "pictures_ids": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "current_picture_id": 3,
   "opening_mode": "line"
 }
