@@ -11,6 +11,17 @@ class SaveDataService:
             save_json = json.load(f)
         save = Save.from_dict(save_json)
         return save.current_picture_id
+
+    @staticmethod
+    def update_current_picture_id(save_title, current_picture_id):
+        with open(f"data\\{save_title}\\save.json", 'r', encoding='utf-8') as f:
+            save_json = json.load(f)
+        save = Save.from_dict(save_json)
+        save.current_picture_id = current_picture_id
+        save_json_new = save.to_dict()
+        with open(f"data\\{save_title}\\save.json", 'w', encoding='utf-8') as f:
+            json.dump(save_json_new, f, ensure_ascii=False, indent=2)
+
     @staticmethod
     def get_picture_ids(save_title):
         with open(f"data\\{save_title}\\save.json", 'r', encoding='utf-8') as f:

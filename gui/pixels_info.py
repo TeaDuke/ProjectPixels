@@ -40,6 +40,8 @@ class PixelsInfo(QWidget):
         self.left_info_lbl.setText("Left pixels:")
         self.update_pixels_info()
 
+        self.picture_window.upd_current_picture.connect(self.update_pixels_info)
+
         self.hbox.addWidget(self.open_picture_btn)
         self.hbox.addWidget(self.add_picture_btn)
 

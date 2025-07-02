@@ -85,4 +85,9 @@ class PictureMainService:
             pic_id = SaveDataService.get_current_picture_id(current_save)
         return PictureDataService.get_progress_picture(current_save, pic_id)
 
+    @staticmethod
+    def update_current_picture_id(current_picture_id):
+        current_save = BaseDataService.get_current_save()
+        SaveDataService.update_current_picture_id(current_save, current_picture_id)
+
 
