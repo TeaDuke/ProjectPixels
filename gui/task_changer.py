@@ -1,12 +1,15 @@
 from PyQt6.QtCore import pyqtSignal
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QGridLayout, QLineEdit, QHBoxLayout, QPushButton
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QGridLayout, QLineEdit, QHBoxLayout, QPushButton, QMessageBox
 
 from data_classes.Task import Task
 from services.task_main_service import TaskMainService
 
 
 class TaskChanger(QWidget):
-    task_created = pyqtSignal()
+    task_updated = pyqtSignal()
+    task_deleted = pyqtSignal(int)
+
+    task = None
 
     def __init__(self):
         super().__init__()
@@ -18,7 +21,8 @@ class TaskChanger(QWidget):
         self.price_info_lbl = QLabel()
         self.price_value_le = QLineEdit()
 
-        self.create_btn = QPushButton()
+        self.delete_btn = QPushButton()
+        self.update_btn = QPushButton()
         self.cancel_btn = QPushButton()
 
         self.grid = QGridLayout()
@@ -30,13 +34,15 @@ class TaskChanger(QWidget):
         self._settings()
 
     def _settings(self):
-        self.title_lbl.setText("Create task")
+        self.title_lbl.setText("Change task")
 
         self.name_info_lbl.setText("Name:")
         self.price_info_lbl.setText("Price (in pixels):")
 
-        self.create_btn.setText("Create")
-        self.create_btn.clicked.connect(self._addTask)
+        self.delete_btn.setText("Delete")
+        self.delete_btn.clicked.connect(self._delete_task)
+        self.update_btn.setText("Update")
+        self.update_btn.clicked.connect(self._update_task)
         self.cancel_btn.setText("Cancel")
         self.cancel_btn.clicked.connect(self.close)
 
@@ -45,7 +51,8 @@ class TaskChanger(QWidget):
         self.grid.addWidget(self.price_info_lbl, 1, 0)
         self.grid.addWidget(self.price_value_le, 1, 1)
 
-        self.hbox.addWidget(self.create_btn)
+        self.hbox.addWidget(self.delete_btn)
+        self.hbox.addWidget(self.update_btn)
         self.hbox.addWidget(self.cancel_btn)
 
         self.vbox.addWidget(self.title_lbl)
@@ -54,10 +61,26 @@ class TaskChanger(QWidget):
 
         self.setLayout(self.vbox)
 
-    def _addTask(self):
-        task = Task(self.name_value_le.text(), self.price_value_le.text())
-        TaskMainService.addTask(task)
-        self.task_created.emit()
+    def set_task(self, task: Task):
+        self.task = task
+        self.name_value_le.setText(self.task.name)
+        self.price_value_le.setText(str(self.task.price))
+
+    def _delete_task(self):
+        reply = QMessageBox.question(self, "Delete task", "Are you sure?",
+                                     QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+                                     QMessageBox.StandardButton.No)
+        if reply == QMessageBox.StandardButton.Yes:
+            TaskMainService.deleteTask(self.task)
+            self.task_deleted.emit(self.task.tid)
+            self.close()
+
+    def _update_task(self):
+        self.task.update_name(self.name_value_le.text())
+        self.task.update_price(int(self.price_value_le.text()))
+        TaskMainService.updateTask(self.task)
+        self.task_updated.emit()
+        self.close()
 
     def closeEvent(self, event):
         self.name_value_le.clear()

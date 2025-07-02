@@ -2,32 +2,45 @@ from PyQt6.QtWidgets import QPushButton
 from PyQt6.QtGui import QPainter, QColor, QFont
 from PyQt6.QtCore import QRect, Qt
 
+from enums.mode_enum import ModeEnum
+
+
 class BadgeButton(QPushButton):
-    def __init__(self, text="", parent=None):
+    parent = None
+    task = None
+
+    def __init__(self, text="", task=None, parent=None):
         super().__init__(text, parent)
         self.badge_number = None  # No badge initially
+        self.task = task
+        self.parent = parent
 
     def mousePressEvent(self, event):
-        if event.button() == Qt.MouseButton.LeftButton:
-            if self.badge_number is None:
-                number = 1
-            else:
-                number = self.badge_number + 1
-            self.set_badge_number(number)
-        elif event.button() == Qt.MouseButton.RightButton:
-            if self.badge_number is None:
-                number = None
-            elif self.badge_number == 1:
-                number = None
-            else:
-                number = self.badge_number - 1
-            self.set_badge_number(number)
+        if self.parent.mode == ModeEnum.GENERAL:
+            if event.button() == Qt.MouseButton.LeftButton:
+                if self.badge_number is None:
+                    number = 1
+                else:
+                    number = self.badge_number + 1
+                self.set_badge_number(number)
+            elif event.button() == Qt.MouseButton.RightButton:
+                if self.badge_number is None:
+                    number = None
+                elif self.badge_number == 1:
+                    number = None
+                else:
+                    number = self.badge_number - 1
+                self.set_badge_number(number)
 
         super().mousePressEvent(event)
+
 
     def set_badge_number(self, number):
         self.badge_number = number
         self.update()  # Trigger repaint
+
+    def get_badge_number(self):
+        return self.badge_number
 
     def clear_badge_number(self):
         self.badge_number = None

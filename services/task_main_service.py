@@ -11,4 +11,20 @@ class TaskMainService:
     @staticmethod
     def addTask(task):
         current_save = BaseDataService.get_current_save()
-        return TaskDataService.addTask(current_save, task)
+        TaskDataService.addTask(current_save, task)
+
+    @staticmethod
+    def deleteTask(task):
+        current_save = BaseDataService.get_current_save()
+        TaskDataService.deleteTask(current_save, task)
+
+    @staticmethod
+    def updateTask(task):
+        current_save = BaseDataService.get_current_save()
+        TaskDataService.updateTask(current_save, task)
+
+    @staticmethod
+    def getNewTid():
+        current_save = BaseDataService.get_current_save()
+        tasks = sorted(TaskDataService.getTasks(current_save), key=lambda task: task.tid, reverse=True)
+        return tasks[0].tid + 1

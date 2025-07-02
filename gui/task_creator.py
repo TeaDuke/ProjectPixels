@@ -55,7 +55,8 @@ class TaskCreator(QWidget):
         self.setLayout(self.vbox)
 
     def _addTask(self):
-        task = Task(self.name_value_le.text(), self.price_value_le.text())
+        new_tid = TaskMainService.getNewTid()
+        task = Task(new_tid ,self.name_value_le.text(), self.price_value_le.text())
         TaskMainService.addTask(task)
         self.task_created.emit()
 
