@@ -25,7 +25,7 @@ class BaseDataService:
         base.current_save = save_title
         base_json = base.to_dict()
         with open(f"data\\base.json", 'w', encoding='utf-8') as f:
-            json.dump(base_json, f, ensure_ascii=False, intend=2)
+            json.dump(base_json, f, ensure_ascii=False, indent=2)
 
     @staticmethod
     def get_saves():
@@ -40,9 +40,9 @@ class BaseDataService:
             base_json = json.load(f)
         base = Base.from_dict(base_json)
         base.saves = saves
-        base_json = base.to_dict()
+        base_json_new = base.to_dict()
         with open(f"data\\base.json", 'w', encoding='utf-8') as f:
-            json.dump(base_json, f, ensure_ascii=False, intend=2)
+            json.dump(base_json_new, f, ensure_ascii=False, indent=2)
 
     @staticmethod
     def create_new_save(title: str):

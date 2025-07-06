@@ -104,5 +104,5 @@ class CreateSave(QWidget):
                 PictureMainService.add_new_picture(self.picture_path)
             else:
                 PictureMainService.add_new_picture("data\\ghibli.jpg")
-            self._open_save()
+            self._open_save(self.save_title_le.text())
 

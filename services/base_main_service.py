@@ -5,7 +5,7 @@ class BaseMainService:
 
     @staticmethod
     def create_new_save(title: str):
-        BaseMainService.create_new_save(title)
+        BaseDataService.create_new_save(title)
 
     @staticmethod
     def get_current_save():
