@@ -1,6 +1,6 @@
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QPalette, QColor
-from PyQt6.QtWidgets import QWidget, QMainWindow, QVBoxLayout, QSizePolicy, QTabBar
+from PyQt6.QtWidgets import QWidget, QMainWindow, QVBoxLayout, QSizePolicy, QTabBar, QPushButton
 
 from gui.pixels_info import PixelsInfo
 from gui.settings import Settings
@@ -17,6 +17,8 @@ class MainWindow(QWidget):
 
         self.settings_window = Settings()
 
+        self.new_save_btn = QPushButton()
+
         self.pxinfo = PixelsInfo()
         self.tasklist = TaskList()
 
@@ -30,9 +32,12 @@ class MainWindow(QWidget):
         self.tabbar.addTab("Settings")
         self.tabbar.tabBarClicked.connect(self.tab_clicked)
 
+        self.new_save_btn.setText("Create new Save")
+
         self.tasklist.tasks_saved.connect(self.update_pixels_info)
 
         self.vbox.addWidget(self.tabbar)
+        self.vbox.addWidget(self.new_save_btn)
         self.vbox.addWidget(self.pxinfo)
         self.vbox.addWidget(self.tasklist)
         self.vbox.setAlignment(Qt.AlignmentFlag.AlignTop)

@@ -108,13 +108,13 @@ class PictureInfo(QWidget):
         pic_info = PictureMainService.get_picture_info(self.active_id)
         if pic_info.all_pixels == pic_info.opened_pixels:
             self.status_label.setText("Finished")
-            self.status_label.setStatusColor("GrEen")
+            self.status_label.set_status_color("GrEen")
         elif self.active_id == self.current_id:
             self.status_label.setText("Work (current)")
-            self.status_label.setStatusColor("red")
+            self.status_label.set_status_color("red")
         else:
             self.status_label.setText("Pause")
-            self.status_label.setStatusColor("velvet")
+            self.status_label.set_status_color("velvet")
 
     def update_current_picture(self):
         pic_info = PictureMainService.get_picture_info(self.active_id)

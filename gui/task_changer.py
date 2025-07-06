@@ -71,14 +71,14 @@ class TaskChanger(QWidget):
                                      QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
                                      QMessageBox.StandardButton.No)
         if reply == QMessageBox.StandardButton.Yes:
-            TaskMainService.deleteTask(self.task)
+            TaskMainService.delete_task(self.task)
             self.task_deleted.emit(self.task.tid)
             self.close()
 
     def _update_task(self):
         self.task.update_name(self.name_value_le.text())
         self.task.update_price(int(self.price_value_le.text()))
-        TaskMainService.updateTask(self.task)
+        TaskMainService.update_task(self.task)
         self.task_updated.emit()
         self.close()
 

@@ -36,7 +36,7 @@ class TaskCreator(QWidget):
         self.price_info_lbl.setText("Price (in pixels):")
 
         self.create_btn.setText("Create")
-        self.create_btn.clicked.connect(self._addTask)
+        self.create_btn.clicked.connect(self._add_task)
         self.cancel_btn.setText("Cancel")
         self.cancel_btn.clicked.connect(self.close)
 
@@ -54,10 +54,10 @@ class TaskCreator(QWidget):
 
         self.setLayout(self.vbox)
 
-    def _addTask(self):
-        new_tid = TaskMainService.getNewTid()
+    def _add_task(self):
+        new_tid = TaskMainService.get_new_tid()
         task = Task(new_tid ,self.name_value_le.text(), self.price_value_le.text())
-        TaskMainService.addTask(task)
+        TaskMainService.add_task(task)
         self.task_created.emit()
 
     def closeEvent(self, event):

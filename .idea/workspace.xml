@@ -4,13 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d03fced-13b4-4431-b900-ce0971b747de" name="Changes" comment="finish modification and deletion of tasks">
-      <change afterPath="$PROJECT_DIR$/gui/custom_widgets/status_label.py" afterDir="false" />
+    <list default="true" id="6d03fced-13b4-4431-b900-ce0971b747de" name="Changes" comment="add status label and ability to change current picture">
+      <change afterPath="$PROJECT_DIR$/gui/create_save.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gui/start_up.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/base_main_service.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/Hollow/save.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/Hollow/save.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_classes/Save.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_classes/Save.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_services/base_data_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_services/base_data_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_services/picture_data_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_services/picture_data_service.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data_services/save_data_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_services/save_data_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_services/task_data_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_services/task_data_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/custom_widgets/status_label.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/custom_widgets/status_label.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/main_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/main_window.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui/picture_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/picture_info.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/pixels_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/pixels_info.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/picture_main_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/services/picture_main_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/task_changer.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/task_changer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/task_creator.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/task_creator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/task_list.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/task_list.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/task_main_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/services/task_main_service.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +57,7 @@
     "Python.pickle_utilit.executor": "Run",
     "Python.picture_data_service.executor": "Debug",
     "Python.ppicture_utilit.executor": "Run",
-    "Python.start.executor": "Run",
+    "Python.start.executor": "Debug",
     "Python.task_list.executor": "Run",
     "Python.test.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -212,7 +224,15 @@
       <option name="project" value="LOCAL" />
       <updated>1751453129625</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="add status label and ability to change current picture">
+      <option name="closed" value="true" />
+      <created>1751461944633</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1751461944633</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -228,7 +248,8 @@
     <MESSAGE value="add settings window. in settings window user can choose opening mode (line, random)" />
     <MESSAGE value="add move between pictures. forget to commit, so may be more changes" />
     <MESSAGE value="finish modification and deletion of tasks" />
-    <option name="LAST_COMMIT_MESSAGE" value="finish modification and deletion of tasks" />
+    <MESSAGE value="add status label and ability to change current picture" />
+    <option name="LAST_COMMIT_MESSAGE" value="add status label and ability to change current picture" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

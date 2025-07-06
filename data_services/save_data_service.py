@@ -1,9 +1,14 @@
 from data_classes.Save import Save
 import json
-from data_services.base_data_service import BaseDataService
 
 
 class SaveDataService:
+
+    @staticmethod
+    def update_save(save_title, save: Save):
+        save_json = save.to_dict()
+        with open(f"data\\{save_title}\\save.json", 'w', encoding='utf-8') as f:
+            json.dump(save_json, f, ensure_ascii=False, indent=2)
 
     @staticmethod
     def get_current_picture_id(save_title):

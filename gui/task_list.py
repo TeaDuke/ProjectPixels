@@ -72,7 +72,7 @@ class TaskList(QWidget):
         self.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
 
     def _create_buttons(self):
-        self.tasks = TaskMainService.getTasks()
+        self.tasks = TaskMainService.get_tasks()
 
         finished_tasks = {}
         for button in self.buttons:

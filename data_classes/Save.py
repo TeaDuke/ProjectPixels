@@ -4,7 +4,7 @@ class Save:
         self.title = title
         self.pictures_ids = []
         self.current_picture_id = 0
-        self.opening_mode = "" # line or random
+        self.opening_mode = "line"
 
     def to_dict(self):
         return {

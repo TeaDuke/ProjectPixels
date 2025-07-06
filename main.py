@@ -3,15 +3,13 @@ import sys
 from PyQt6.QtWidgets import QApplication, QMainWindow
 
 from gui.main_window import MainWindow
+from gui.start_up import StartUp
 
 
 def start():
     app = QApplication(sys.argv)
     # app.setStyle()
-    window = QMainWindow()
-    window.setCentralWidget(MainWindow())
-    window.resize(600,600)
-    window.show()
+    start_up = StartUp()
     app.exec()
 
 if __name__ == '__main__':

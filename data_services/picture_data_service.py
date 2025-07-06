@@ -16,7 +16,10 @@ class PictureDataService:
     @staticmethod
     def add_new_picture(save_title, path):
         ids = SaveDataService.get_picture_ids(save_title)
-        new_id = get_max_number_from_array(ids) + 1
+        if len(ids) != 0:
+            new_id = get_max_number_from_array(ids) + 1
+        else:
+            new_id = 1
         ids.append(new_id)
 
         source = Path(path)
@@ -29,6 +32,8 @@ class PictureDataService:
         PictureDataService._create_picture_data(save_title, new_id, source.name, folder_path)
 
         SaveDataService.update_picture_ids(save_title, ids)
+        if new_id == 1:
+            SaveDataService.update_current_picture_id(save_title, new_id)
 
     @staticmethod
     def _create_progress_picture(save_title, new_id):

@@ -18,7 +18,7 @@ class StatusLabel(QLabel):
         elif self.color == "green":
             self.setStyleSheet("background-color: MediumSeaGreen; color: white")
 
-    def setStatusColor(self, color):
+    def set_status_color(self, color):
         self.color = str(color).lower()
         self._settings()
 
