@@ -132,3 +132,7 @@ class TaskList(QWidget):
             self.mode = ModeEnum.GENERAL
             self.change_btn.setStyleSheet("")
             self.change_btn.setText("Change: Off")
+
+    def close_windows(self):
+        self.task_creator.close()
+        self.task_changer.close()

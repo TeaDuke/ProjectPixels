@@ -18,6 +18,11 @@ class PictureMainService:
         PictureDataService.add_new_picture(current_save, pic_path)
 
     @staticmethod
+    def delete_picture(pid: int):
+        current_save = BaseDataService.get_current_save()
+        PictureDataService.delete_picture(current_save, pid)
+
+    @staticmethod
     def open_pixels(number: Number):
         if number == 0:
             return

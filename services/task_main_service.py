@@ -27,4 +27,7 @@ class TaskMainService:
     def get_new_tid():
         current_save = BaseDataService.get_current_save()
         tasks = sorted(TaskDataService.get_tasks(current_save), key=lambda task: task.tid, reverse=True)
-        return tasks[0].tid + 1
+        new_tid = 1
+        if len(tasks) > 0:
+            new_tid = tasks[0].tid + 1
+        return new_tid

@@ -76,11 +76,23 @@ class TaskChanger(QWidget):
             self.close()
 
     def _update_task(self):
+        if not self._validation_check():
+            return
         self.task.update_name(self.name_value_le.text())
         self.task.update_price(int(self.price_value_le.text()))
         TaskMainService.update_task(self.task)
         self.task_updated.emit()
         self.close()
+
+    def _validation_check(self):
+        if self.name_value_le.text() == "" or self.price_value_le.text() == "":
+            return False
+        try:
+            price = int(self.price_value_le.text())
+            return True
+        except Exception as e:
+            print(f"Price is not number. Exception: {e}")
+            return False
 
     def closeEvent(self, event):
         self.name_value_le.clear()

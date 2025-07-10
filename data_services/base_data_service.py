@@ -11,6 +11,26 @@ from data_services.task_data_service import TaskDataService
 class BaseDataService:
 
     @staticmethod
+    def create_data_folder():
+        folder_path = Path(f"data")
+        if not folder_path.is_dir():
+            folder_path.mkdir(parents=True, exist_ok=True)
+
+    @staticmethod
+    def create_base_json():
+        base = Base()
+        base.current_save = ""
+        base.saves = []
+
+        folder_path = Path("data")
+        data_path = folder_path / "base.json"
+        if not data_path.is_file():
+            data_path.write_text("")
+            base_json = base.to_dict()
+            with open(f"data\\base.json", 'w', encoding='utf-8') as f:
+                json.dump(base_json, f, ensure_ascii=False, indent=2)
+
+    @staticmethod
     def get_current_save():
         with open(f"data\\base.json", 'r', encoding='utf-8') as f:
             base_json = json.load(f)
@@ -23,9 +43,9 @@ class BaseDataService:
             base_json = json.load(f)
         base = Base.from_dict(base_json)
         base.current_save = save_title
-        base_json = base.to_dict()
+        base_json_new = base.to_dict()
         with open(f"data\\base.json", 'w', encoding='utf-8') as f:
-            json.dump(base_json, f, ensure_ascii=False, indent=2)
+            json.dump(base_json_new, f, ensure_ascii=False, indent=2)
 
     @staticmethod
     def get_saves():

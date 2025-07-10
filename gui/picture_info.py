@@ -34,6 +34,8 @@ class PictureInfo(QWidget):
         self.all_info_lbl = QLabel()
         self.all_value_lbl = QLabel()
 
+        self.delete_btn = QPushButton()
+
         self.hbox_status = QHBoxLayout()
 
         self.hbox = QHBoxLayout()
@@ -52,18 +54,18 @@ class PictureInfo(QWidget):
 
         self.left_btn.setIcon(QIcon("images\\chevron-left.svg"))
         self.left_btn.setIconSize(QSize(48,48))
-        self.left_btn.clicked.connect(lambda: self.change_picture("left"))
+        self.left_btn.clicked.connect(lambda: self._change_picture("left"))
         self.right_btn.setIcon(QIcon("images\\chevron-right.svg"))
         self.right_btn.setIconSize(QSize(48,48))
-        self.right_btn.clicked.connect(lambda: self.change_picture("right"))
-        self.check_possibilities_to_move()
+        self.right_btn.clicked.connect(lambda: self._change_picture("right"))
+        self._check_possibilities_to_move()
 
         self.picture.setMinimumSize(200, 100)
         self.picture.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         self.picture.setStyleSheet("border: 1px solid red; padding: 2px;")
         self.update_progress_picture()
 
-        self.status_label.clicked.connect(self.update_current_picture)
+        self.status_label.clicked.connect(self._update_current_picture)
         self.update_status_label()
 
         self.hbox_status.addWidget(self.status_label)
@@ -77,12 +79,16 @@ class PictureInfo(QWidget):
         self.all_info_lbl.setText("All pixels:")
         self.update_pixels_info()
 
+        self.delete_btn.setText("Delete this picture")
+        self.delete_btn.clicked.connect(self._delete_picture)
+
         self.grid.addWidget(self.opened_info_lbl, 0, 0)
         self.grid.addWidget(self.opened_value_lbl, 0, 1)
         self.grid.addWidget(self.left_info_lbl, 1, 0)
         self.grid.addWidget(self.left_value_lbl, 1, 1)
         self.grid.addWidget(self.all_info_lbl, 2, 0)
         self.grid.addWidget(self.all_value_lbl, 2, 1)
+        self.grid.addWidget(self.delete_btn, 0, 3, 3, 1)
 
         self.vbox.addLayout(self.hbox_status)
         self.vbox.addLayout(self.hbox, stretch=1)
@@ -106,6 +112,9 @@ class PictureInfo(QWidget):
 
     def update_status_label(self):
         pic_info = PictureMainService.get_picture_info(self.active_id)
+        if pic_info.all_pixels == pic_info.opened_pixels and self.active_id == self.current_id:
+            self.status_label.setText("Finished (current)")
+            self.status_label.set_status_color("velvet")
         if pic_info.all_pixels == pic_info.opened_pixels:
             self.status_label.setText("Finished")
             self.status_label.set_status_color("GrEen")
@@ -116,7 +125,14 @@ class PictureInfo(QWidget):
             self.status_label.setText("Pause")
             self.status_label.set_status_color("velvet")
 
-    def update_current_picture(self):
+    def update_all_info(self):
+        self.update_progress_picture()
+        self.update_pixels_info()
+        self.update_status_label()
+        self._check_possibilities_to_move()
+        self._check_possibilities_to_delete()
+
+    def _update_current_picture(self):
         pic_info = PictureMainService.get_picture_info(self.active_id)
         if pic_info.all_pixels != pic_info.opened_pixels and self.current_id != self.active_id:
             reply = QMessageBox.question(self, "Set new current picture", "Are you sure?",
@@ -125,9 +141,7 @@ class PictureInfo(QWidget):
             if reply == QMessageBox.StandardButton.Yes:
                 self.current_id = self.active_id
                 PictureMainService.update_current_picture_id(self.current_id)
-                self.update_pixels_info()
-                self.update_progress_picture()
-                self.update_status_label()
+                self.update_all_info()
                 self.upd_current_picture.emit()
 
     def resizeEvent(self, event):
@@ -140,30 +154,74 @@ class PictureInfo(QWidget):
     def reset_widget(self):
         self.active_id = PictureMainService.get_picture_info().id
         self.pictures_ids = SaveMainService.get_pictures_ids()
-        self.update_pixels_info()
-        self.update_progress_picture()
-        self.update_status_label()
-        self.check_possibilities_to_move()
+        self.update_all_info()
 
-    def change_picture(self, move):
+    def _change_picture(self, move):
         if move == "right":
             ind = self.pictures_ids.index(self.active_id)
             self.active_id = self.pictures_ids[ind + 1]
         elif move == "left":
             ind = self.pictures_ids.index(self.active_id)
             self.active_id = self.pictures_ids[ind - 1]
-        self.update_progress_picture()
-        self.update_pixels_info()
-        self.update_status_label()
-        self.check_possibilities_to_move()
+        self.update_all_info()
 
-    def check_possibilities_to_move(self):
+    def _delete_picture(self):
+        if len(self.pictures_ids) < 2:
+            return
+
+        reply = QMessageBox.question(self, "Delete this picture?", "Are you sure?",
+                                     QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+                                     QMessageBox.StandardButton.No)
+        if reply == QMessageBox.StandardButton.No:
+            return
+
+        delete_id = self.active_id
+
+        if self.active_id == self.current_id:
+            new_c_id = self._find_new_current_picture()
+            self.current_id = new_c_id
+            self.active_id = self.current_id
+            PictureMainService.update_current_picture_id(self.current_id)
+            self.update_all_info()
+            self.upd_current_picture.emit()
+        else:
+            if self.right_btn.isEnabled():
+                ind = self.pictures_ids.index(self.active_id)
+                self.active_id = self.pictures_ids[ind + 1]
+            else:
+                ind = self.pictures_ids.index(self.active_id)
+                self.active_id = self.pictures_ids[ind - 1]
+            self.update_all_info()
+
+        PictureMainService.delete_picture(delete_id)
+        self.pictures_ids = SaveMainService.get_pictures_ids()
+        self.update_all_info()
+
+
+    def _find_new_current_picture(self):
+        new_p_id = 0
+        for pid in self.pictures_ids:
+            pic_info = PictureMainService.get_picture_info(pid)
+            if pid != self.current_id and pic_info.all_pixels != pic_info.opened_pixels:
+                new_p_id = pid
+                break
+        if new_p_id == 0:
+            for pid in self.pictures_ids:
+                pic_info = PictureMainService.get_picture_info(pid)
+                if pid != self.current_id:
+                    new_p_id = pid
+                    break
+        return new_p_id
+
+    def _check_possibilities_to_move(self):
+        self.left_btn.setEnabled(True)
+        self.right_btn.setEnabled(True)
         if self.pictures_ids.index(self.active_id) == 0:
             self.left_btn.setEnabled(False)
-            self.right_btn.setEnabled(True)
-        elif self.pictures_ids.index(self.active_id) == len(self.pictures_ids) - 1:
+        if self.pictures_ids.index(self.active_id) == len(self.pictures_ids) - 1:
             self.right_btn.setEnabled(False)
-            self.left_btn.setEnabled(True)
-        else:
-            self.left_btn.setEnabled(True)
-            self.right_btn.setEnabled(True)
+
+    def _check_possibilities_to_delete(self):
+        self.delete_btn.setEnabled(True)
+        if len(self.pictures_ids) < 2:
+            self.delete_btn.setEnabled(False)

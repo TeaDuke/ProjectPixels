@@ -55,10 +55,22 @@ class TaskCreator(QWidget):
         self.setLayout(self.vbox)
 
     def _add_task(self):
+        if not self._validation_check():
+            return
         new_tid = TaskMainService.get_new_tid()
         task = Task(new_tid ,self.name_value_le.text(), self.price_value_le.text())
         TaskMainService.add_task(task)
         self.task_created.emit()
+
+    def _validation_check(self):
+        if self.name_value_le.text() == "" or self.price_value_le.text() == "":
+            return False
+        try:
+            price = int(self.price_value_le.text())
+            return True
+        except Exception as e:
+            print(f"Price is not number. Exception: {e}")
+            return False
 
     def closeEvent(self, event):
         self.name_value_le.clear()

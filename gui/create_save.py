@@ -1,4 +1,4 @@
-from PyQt6.QtCore import Qt
+from PyQt6.QtCore import Qt, pyqtSignal
 from PyQt6.QtGui import QPixmap, QImage
 from PyQt6.QtWidgets import QWidget, QLineEdit, QPushButton, QLabel, QVBoxLayout, QHBoxLayout, QScrollArea, QSizePolicy, \
     QFileDialog
@@ -8,6 +8,8 @@ from services.picture_main_service import PictureMainService
 
 
 class CreateSave(QWidget):
+
+    current_save_chosen = pyqtSignal(str)
 
     saves = []
     save_buttons = []
@@ -74,6 +76,7 @@ class CreateSave(QWidget):
 
     def _create_list_of_saves(self):
         self.saves = BaseMainService.get_saves()
+        self.save_buttons = []
         for index, save in enumerate(self.saves):
             save_button = QPushButton()
             save_button.setText(save)
@@ -93,16 +96,16 @@ class CreateSave(QWidget):
             self.add_picture_lbl.setText(self.picture_path)
 
     def _open_save(self, title): #TODO: finish open save logic
-        print(title)
+        self.current_save_chosen.emit(title)
+        self.close()
 
     def _create_save(self): #TODO: check if title is creatable, forbidden symbols
         if self.save_title_le.text() == "" or self.save_title_le.text() in self.saves:
             return
-        else:
-            BaseMainService.create_new_save(self.save_title_le.text())
-            if self.picture_path != "":
-                PictureMainService.add_new_picture(self.picture_path)
-            else:
-                PictureMainService.add_new_picture("data\\ghibli.jpg")
-            self._open_save(self.save_title_le.text())
+        if self.picture_path == "":
+            return
+
+        BaseMainService.create_new_save(self.save_title_le.text())
+        PictureMainService.add_new_picture(self.picture_path)
+        self._open_save(self.save_title_le.text())
 

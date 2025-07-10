@@ -1,5 +1,6 @@
 import json
 import shutil
+import os
 
 import numpy
 from PIL import Image
@@ -34,6 +35,27 @@ class PictureDataService:
         SaveDataService.update_picture_ids(save_title, ids)
         if new_id == 1:
             SaveDataService.update_current_picture_id(save_title, new_id)
+
+    @staticmethod
+    def delete_picture(save_title, pid: int):
+        ids = SaveDataService.get_picture_ids(save_title)
+        ids.remove(pid)
+
+        folder = f"data\\{save_title}\\pictures\\{pid}"
+        for filename in os.listdir(folder):
+            file_path = os.path.join(folder, filename)
+            try:
+                if os.path.isfile(file_path) or os.path.islink(file_path):
+                    os.unlink(file_path) # unlink is the same as remove
+                elif os.path.isdir(file_path):
+                    shutil.rmtree(file_path)
+            except Exception as e:
+                print('Failed to delete %s. Reason: %s' % (file_path, e))
+
+        folder_path = Path(f"data\\{save_title}\\pictures\\{pid}")
+        folder_path.rmdir()
+
+        SaveDataService.update_picture_ids(save_title, ids)
 
     @staticmethod
     def _create_progress_picture(save_title, new_id):

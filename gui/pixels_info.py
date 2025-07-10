@@ -76,5 +76,7 @@ class PixelsInfo(QWidget):
         left_pixels = pic_info.all_pixels - pic_info.opened_pixels
         self.left_value_lbl.setText(f"{left_pixels}")
 
-        self.picture_window.update_progress_picture()
-        self.picture_window.update_pixels_info()
+        self.picture_window.update_all_info()
+
+    def close_windows(self):
+        self.picture_window.close()
