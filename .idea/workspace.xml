@@ -4,25 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d03fced-13b4-4431-b900-ce0971b747de" name="Changes" comment="save creation works! finally!&#10;2 new saves: Alpha and Beta">
+    <list default="true" id="6d03fced-13b4-4431-b900-ce0971b747de" name="Changes" comment="many changes:&#10;close windows when change save&#10;delete pictures&#10;task validation&#10;create data folder and base json">
+      <change afterPath="$PROJECT_DIR$/utilits/filename_utilits.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utilits/image_utilits.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/Aplha/save.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/Aplha/save.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/Aplha/tasks.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/Aplha/tasks.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/Beta/tasks.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/Beta/tasks.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/base.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/base.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_services/base_data_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_services/base_data_service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_services/picture_data_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_services/picture_data_service.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui/create_save.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/create_save.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/main_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/main_window.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui/picture_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/picture_info.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/pixels_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/pixels_info.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/start_up.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/start_up.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/task_changer.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/task_changer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/task_creator.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/task_creator.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui/task_list.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/task_list.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/base_main_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/services/base_main_service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/picture_main_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/services/picture_main_service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/task_main_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/services/task_main_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -248,7 +238,15 @@
       <option name="project" value="LOCAL" />
       <updated>1751809316041</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="many changes:&#10;close windows when change save&#10;delete pictures&#10;task validation&#10;create data folder and base json">
+      <option name="closed" value="true" />
+      <created>1752153262616</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1752153262616</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -278,7 +276,8 @@
     <MESSAGE value="add status label and ability to change current picture" />
     <MESSAGE value="save commit before testing save creation" />
     <MESSAGE value="save creation works! finally!&#10;2 new saves: Alpha and Beta" />
-    <option name="LAST_COMMIT_MESSAGE" value="save creation works! finally!&#10;2 new saves: Alpha and Beta" />
+    <MESSAGE value="many changes:&#10;close windows when change save&#10;delete pictures&#10;task validation&#10;create data folder and base json" />
+    <option name="LAST_COMMIT_MESSAGE" value="many changes:&#10;close windows when change save&#10;delete pictures&#10;task validation&#10;create data folder and base json" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

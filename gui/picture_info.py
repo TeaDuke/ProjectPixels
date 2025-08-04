@@ -7,6 +7,7 @@ from gui.custom_widgets.scalable_label import ScalableLabel
 from gui.custom_widgets.status_label import StatusLabel
 from services.picture_main_service import PictureMainService
 from services.save_main_service import SaveMainService
+from utilits.image_utilits import resource_path
 
 
 class PictureInfo(QWidget):
@@ -52,10 +53,10 @@ class PictureInfo(QWidget):
         self.current_id = self.active_id
         self.pictures_ids = SaveMainService.get_pictures_ids()
 
-        self.left_btn.setIcon(QIcon("images\\chevron-left.svg"))
+        self.left_btn.setIcon(QIcon(resource_path("chevron-left.svg")))
         self.left_btn.setIconSize(QSize(48,48))
         self.left_btn.clicked.connect(lambda: self._change_picture("left"))
-        self.right_btn.setIcon(QIcon("images\\chevron-right.svg"))
+        self.right_btn.setIcon(QIcon(resource_path("chevron-right.svg")))
         self.right_btn.setIconSize(QSize(48,48))
         self.right_btn.clicked.connect(lambda: self._change_picture("right"))
         self._check_possibilities_to_move()
@@ -114,8 +115,8 @@ class PictureInfo(QWidget):
         pic_info = PictureMainService.get_picture_info(self.active_id)
         if pic_info.all_pixels == pic_info.opened_pixels and self.active_id == self.current_id:
             self.status_label.setText("Finished (current)")
-            self.status_label.set_status_color("velvet")
-        if pic_info.all_pixels == pic_info.opened_pixels:
+            self.status_label.set_status_color("red")
+        elif pic_info.all_pixels == pic_info.opened_pixels:
             self.status_label.setText("Finished")
             self.status_label.set_status_color("GrEen")
         elif self.active_id == self.current_id:

@@ -7,6 +7,7 @@ from gui.start_up import StartUp
 
 
 def start():
+
     app = QApplication(sys.argv)
     # app.setStyle()
     start_up = StartUp()

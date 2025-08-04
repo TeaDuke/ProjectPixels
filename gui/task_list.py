@@ -51,7 +51,7 @@ class TaskList(QWidget):
         self.save_btn.clicked.connect(self.save_tasks)
         self.change_btn.setText("Change: Off")
         self.change_btn.clicked.connect(self.change_mode)
-        self.add_btn.setText("Add XXXX")
+        self.add_btn.setText("Add task")
         self.add_btn.clicked.connect(self.open_task_creator)
 
         self.hbox.addWidget(self.save_btn)

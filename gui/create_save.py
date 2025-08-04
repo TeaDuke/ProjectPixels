@@ -1,3 +1,6 @@
+import os
+
+import psutil
 from PyQt6.QtCore import Qt, pyqtSignal
 from PyQt6.QtGui import QPixmap, QImage
 from PyQt6.QtWidgets import QWidget, QLineEdit, QPushButton, QLabel, QVBoxLayout, QHBoxLayout, QScrollArea, QSizePolicy, \
@@ -5,6 +8,8 @@ from PyQt6.QtWidgets import QWidget, QLineEdit, QPushButton, QLabel, QVBoxLayout
 
 from services.base_main_service import BaseMainService
 from services.picture_main_service import PictureMainService
+from utilits.filename_utilits import check_filename
+from utilits.image_utilits import resource_path
 
 
 class CreateSave(QWidget):
@@ -16,6 +21,8 @@ class CreateSave(QWidget):
     picture_path = ""
 
     def __init__(self):
+        #print(psutil.Process(os.getpid()).memory_info().rss / 1024 ** 2)
+
         super().__init__()
 
         self.saves_container = QWidget()
@@ -45,7 +52,7 @@ class CreateSave(QWidget):
         self.scroll_area.setWidget(self.saves_container)
         self.scroll_area.setFixedHeight(300)
 
-        self.pixmap = QPixmap.fromImage(QImage("logo.png"))
+        self.pixmap = QPixmap.fromImage(QImage(resource_path("logo.png")))
         self.pixmap = self.pixmap.scaled(100, 100, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
         self.logo.setPixmap(self.pixmap)
         self.logo.setMaximumHeight(100)
@@ -87,15 +94,15 @@ class CreateSave(QWidget):
     def _add_picture(self):
         pic_path, _ = QFileDialog.getOpenFileName(
             self,
-            "Select a picture (jpg, png)",
+            "Select a picture (jpg, jpeg, png)",
             "",
-            "Images (*.png, *.jpg);"
+            "Image files (*.jpg *.jpeg *.png) |*.jpg; *.jpeg; *.png"
         )
         if pic_path:
             self.picture_path = pic_path
             self.add_picture_lbl.setText(self.picture_path)
 
-    def _open_save(self, title): #TODO: finish open save logic
+    def _open_save(self, title):
         self.current_save_chosen.emit(title)
         self.close()
 
@@ -104,8 +111,11 @@ class CreateSave(QWidget):
             return
         if self.picture_path == "":
             return
+        title = self.save_title_le.text().strip()
+        if not check_filename(title):
+            return
 
-        BaseMainService.create_new_save(self.save_title_le.text())
+        BaseMainService.create_new_save(title)
         PictureMainService.add_new_picture(self.picture_path)
-        self._open_save(self.save_title_le.text())
+        self._open_save(title)
 
