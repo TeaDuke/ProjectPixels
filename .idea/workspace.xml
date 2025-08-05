@@ -4,15 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d03fced-13b4-4431-b900-ce0971b747de" name="Changes" comment="many changes:&#10;close windows when change save&#10;delete pictures&#10;task validation&#10;create data folder and base json">
-      <change afterPath="$PROJECT_DIR$/utilits/filename_utilits.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utilits/image_utilits.py" afterDir="false" />
+    <list default="true" id="6d03fced-13b4-4431-b900-ce0971b747de" name="Changes" comment="changes for .exe file">
+      <change afterPath="$PROJECT_DIR$/check.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chevron-down.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/colors.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gui/custom_widgets/pp_button.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gui/custom_widgets/pp_dropdown.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gui/custom_widgets/pp_entervalue.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gui/custom_widgets/pp_lineedit.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/base.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/base.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/create_save.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/create_save.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/picture_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/picture_info.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/task_list.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/task_list.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/main_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/main_window.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,31 +41,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.json_utilit.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main_window.executor&quot;: &quot;Run&quot;,
-    &quot;Python.pickle_utilit.executor&quot;: &quot;Run&quot;,
-    &quot;Python.picture_data_service.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.ppicture_utilit.executor&quot;: &quot;Run&quot;,
-    &quot;Python.start.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.task_list.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/maxch/Documents/projects/ProjectPixels/images&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.json_utilit.executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.main_window.executor": "Run",
+    "Python.pickle_utilit.executor": "Run",
+    "Python.picture_data_service.executor": "Debug",
+    "Python.ppicture_utilit.executor": "Run",
+    "Python.start.executor": "Run",
+    "Python.task_list.executor": "Run",
+    "Python.test.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/maxch/Documents/projects/ProjectPixels",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\maxch\Documents\projects\ProjectPixels" />
       <recent name="C:\Users\maxch\Documents\projects\ProjectPixels\images" />
       <recent name="C:\Users\maxch\Documents\projects\ProjectPixels\data\Hollow\pictures\1" />
       <recent name="C:\Users\maxch\Documents\projects\ProjectPixels\services" />
       <recent name="C:\Users\maxch\Documents\projects\ProjectPixels\utilits" />
-      <recent name="C:\Users\maxch\Documents\projects\ProjectPixels\data\Hollow" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\maxch\Documents\projects\ProjectPixels\gui\custom_widgets" />
@@ -246,7 +248,15 @@
       <option name="project" value="LOCAL" />
       <updated>1752153262616</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="changes for .exe file">
+      <option name="closed" value="true" />
+      <created>1754322414196</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1754322414196</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -277,7 +287,8 @@
     <MESSAGE value="save commit before testing save creation" />
     <MESSAGE value="save creation works! finally!&#10;2 new saves: Alpha and Beta" />
     <MESSAGE value="many changes:&#10;close windows when change save&#10;delete pictures&#10;task validation&#10;create data folder and base json" />
-    <option name="LAST_COMMIT_MESSAGE" value="many changes:&#10;close windows when change save&#10;delete pictures&#10;task validation&#10;create data folder and base json" />
+    <MESSAGE value="changes for .exe file" />
+    <option name="LAST_COMMIT_MESSAGE" value="changes for .exe file" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

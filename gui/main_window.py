@@ -1,11 +1,17 @@
 from PyQt6.QtCore import Qt, pyqtSignal
-from PyQt6.QtGui import QPalette, QColor
+from PyQt6.QtGui import QPalette, QColor, QIcon
 from PyQt6.QtWidgets import QWidget, QMainWindow, QVBoxLayout, QSizePolicy, QTabBar, QPushButton, QComboBox
 
+from colors import BACKGROUND
+from gui.custom_widgets.pp_button import PPButton
+from gui.custom_widgets.pp_dropdown import PPDropDown
+from gui.custom_widgets.pp_entervalue import PPEnterValue
+from gui.custom_widgets.pp_lineedit import PPLineEdit
 from gui.pixels_info import PixelsInfo
 from gui.settings import Settings
 from gui.task_list import TaskList
 from services.base_main_service import BaseMainService
+from utilits.image_utilits import resource_path
 
 
 class MainWindow(QWidget):
@@ -22,6 +28,11 @@ class MainWindow(QWidget):
         # declare widgets
         self.tabbar = QTabBar()
 
+        self.pp_btn = PPButton("default")
+        self.pp_le = PPLineEdit()
+        self.pp_ev = PPEnterValue()
+        self.pp_dd = PPDropDown()
+
         self.settings_window = Settings()
 
         self.saves_combo = QComboBox()
@@ -33,6 +44,7 @@ class MainWindow(QWidget):
         self.vbox = QVBoxLayout()
 
         self._settings()
+        self.setCss()
 
     def _settings(self):
         self.resize(600,600)
@@ -47,6 +59,12 @@ class MainWindow(QWidget):
         self.saves_combo.setCurrentText(self.current_save)
         self.saves_combo.currentTextChanged.connect(lambda: self._change_current_save(self.saves_combo.currentText()))
 
+        self.pp_btn.setText("PP button")
+        self.pp_ev.setTextToLbl("Task name:")
+        self.pp_dd.setMaximumWidth(200)
+        self.pp_dd.setItems(self.saves)
+        self.pp_dd.setCurrentText(self.current_save)
+
         self.new_save_btn.setText("Create new Save")
         self.new_save_btn.clicked.connect(self._open_create_save)
 
@@ -54,12 +72,26 @@ class MainWindow(QWidget):
 
         self.vbox.addWidget(self.tabbar)
         self.vbox.addWidget(self.saves_combo)
+
+        self.vbox.addWidget(self.pp_btn)
+        self.vbox.addWidget(self.pp_le)
+        self.vbox.addWidget(self.pp_ev)
+        self.vbox.addWidget(self.pp_dd)
+
         self.vbox.addWidget(self.new_save_btn)
         self.vbox.addWidget(self.pxinfo)
         self.vbox.addWidget(self.tasklist)
         self.vbox.setAlignment(Qt.AlignmentFlag.AlignTop)
 
         self.setLayout(self.vbox)
+
+    def setCss(self):
+        self.setStyleSheet(f"""
+            MainWindow
+            {{
+                background-color: {BACKGROUND};
+            }}
+        """)
 
     def update_pixels_info(self):
         self.pxinfo.update_pixels_info()
