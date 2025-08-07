@@ -1,8 +1,10 @@
 {
   "title": "Aplha",
   "pictures_ids": [
-    3
+    3,
+    4,
+    5
   ],
-  "current_picture_id": 3,
+  "current_picture_id": 5,
   "opening_mode": "random"
 }

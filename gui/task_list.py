@@ -4,6 +4,7 @@ from PyQt6.QtCore import pyqtSignal
 from data_classes.Task import Task
 from enums.mode_enum import ModeEnum
 from gui.custom_widgets.badge_button import BadgeButton
+from gui.custom_widgets.pp_button import PPButton
 from gui.task_changer import TaskChanger
 from gui.task_creator import TaskCreator
 from services.picture_main_service import PictureMainService
@@ -37,6 +38,8 @@ class TaskList(QWidget):
         self.task_changer.task_updated.connect(self.update_task)
         self.task_changer.task_deleted.connect(self.delete_task)
 
+        self.pp_btn = PPButton(self, "default")
+
         self.hbox = QHBoxLayout()
         self.grid = QGridLayout()
         self.vbox = QVBoxLayout()
@@ -54,6 +57,9 @@ class TaskList(QWidget):
         self.add_btn.setText("Add task")
         self.add_btn.clicked.connect(self.open_task_creator)
 
+        self.pp_btn.setText("TEst button")
+        self.pp_btn.setBadgeFunctionality(True)
+
         self.hbox.addWidget(self.save_btn)
         self.hbox.addWidget(self.change_btn)
         self.hbox.addWidget(self.add_btn)
@@ -66,6 +72,7 @@ class TaskList(QWidget):
         widget.setPalette(get_palette(212, 44, 44))
 
         self.vbox.addLayout(self.hbox)
+        self.vbox.addWidget(self.pp_btn)
         self.vbox.addWidget(widget)
 
         self.setLayout(self.vbox)

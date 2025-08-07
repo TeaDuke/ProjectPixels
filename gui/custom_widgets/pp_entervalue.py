@@ -1,6 +1,6 @@
 from PyQt6.QtWidgets import QWidget, QLabel, QHBoxLayout, QGridLayout
 
-from colors import *
+from consts import *
 from gui.custom_widgets.pp_lineedit import PPLineEdit
 
 
@@ -30,8 +30,8 @@ class PPEnterValue (QWidget):
         self.setStyleSheet(f"""
             QLabel
             {{
-                color: {TEXT};
-                font-size: 18px
+                color: rgba({TEXT_DARKER_R}, {TEXT_DARKER_G}, {TEXT_DARKER_B}, {TEXT_DARKER_A});
+                font-size: {TEXT_SIZE}
             }}
         """)
 

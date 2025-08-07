@@ -2,11 +2,15 @@ from PyQt6.QtCore import Qt, pyqtSignal
 from PyQt6.QtGui import QPalette, QColor, QIcon
 from PyQt6.QtWidgets import QWidget, QMainWindow, QVBoxLayout, QSizePolicy, QTabBar, QPushButton, QComboBox
 
-from colors import BACKGROUND
+from consts import BACKGROUND
+from enums.status_enum import StatusEnum
 from gui.custom_widgets.pp_button import PPButton
 from gui.custom_widgets.pp_dropdown import PPDropDown
 from gui.custom_widgets.pp_entervalue import PPEnterValue
+from gui.custom_widgets.pp_iconbutton import PPIconButton
+from gui.custom_widgets.pp_info import PPInfo
 from gui.custom_widgets.pp_lineedit import PPLineEdit
+from gui.custom_widgets.pp_statusbar import PPStatusBar
 from gui.pixels_info import PixelsInfo
 from gui.settings import Settings
 from gui.task_list import TaskList
@@ -28,10 +32,13 @@ class MainWindow(QWidget):
         # declare widgets
         self.tabbar = QTabBar()
 
-        self.pp_btn = PPButton("default")
+        self.pp_btn = PPButton(self, "default")
         self.pp_le = PPLineEdit()
         self.pp_ev = PPEnterValue()
         self.pp_dd = PPDropDown()
+        self.pp_info = PPInfo()
+        self.pp_icon_btn = PPIconButton("stroke", "left")
+        self.pp_status_bar = PPStatusBar(self, StatusEnum.STOPPED)
 
         self.settings_window = Settings()
 
@@ -77,6 +84,10 @@ class MainWindow(QWidget):
         self.vbox.addWidget(self.pp_le)
         self.vbox.addWidget(self.pp_ev)
         self.vbox.addWidget(self.pp_dd)
+        self.vbox.addWidget(self.pp_info)
+        self.vbox.addWidget(self.pp_icon_btn)
+        # self.pp_status_bar.setStyleSheet("background-color:red;")
+        self.vbox.addWidget(self.pp_status_bar)
 
         self.vbox.addWidget(self.new_save_btn)
         self.vbox.addWidget(self.pxinfo)

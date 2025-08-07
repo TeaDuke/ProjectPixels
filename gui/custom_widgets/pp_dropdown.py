@@ -1,7 +1,7 @@
 from PyQt6.QtCore import Qt, QPoint
 from PyQt6.QtGui import QIcon, QAction
 from PyQt6.QtWidgets import QComboBox, QWidget, QMenu, QHBoxLayout
-from colors import *
+from consts import *
 from gui.custom_widgets.pp_button import PPButton
 from utilits.image_utilits import resource_path
 
@@ -40,7 +40,7 @@ class PPDropDown (QWidget):
                 background-color: {BACKGROUND_DARKER};
                 border-radius: 8px;
                 padding: 10px;
-                font-size: 18px;
+                font-size: {TEXT_SIZE};
                 color: {TEXT};
             }}
             QMenu::item
@@ -66,6 +66,7 @@ class PPDropDown (QWidget):
             action = QAction(item, self)
             action.setIcon(QIcon(resource_path("check.svg")))
             action.setIconVisibleInMenu(False)
+
             action.triggered.connect(lambda checked, text=item: self.select_item(text))
             self.actions.append(action)
             self.menu.addAction(action)

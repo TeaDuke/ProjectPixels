@@ -1,6 +1,6 @@
 from PyQt6.QtWidgets import QLineEdit
 
-from colors import *
+from consts import *
 
 
 class PPLineEdit (QLineEdit):
@@ -14,7 +14,7 @@ class PPLineEdit (QLineEdit):
             PPLineEdit
             {{
                 color: {TEXT};
-                font-size: 18px;
+                font-size: {TEXT_SIZE};
                 background-color: {BACKGROUND_LIGHTER};
                 border-radius: 8px;
                 padding: 6px 10px 6px 10px;

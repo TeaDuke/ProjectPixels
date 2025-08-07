@@ -16,7 +16,7 @@ class PictureDataService:
 
     @staticmethod
     def add_new_picture(save_title, path):
-        ids = SaveDataService.get_picture_ids(save_title)
+        ids = SaveDataService.get_pictures_ids(save_title)
         if len(ids) != 0:
             new_id = get_max_number_from_array(ids) + 1
         else:
@@ -32,13 +32,14 @@ class PictureDataService:
         PictureDataService._create_progress_picture(save_title, new_id)
         PictureDataService._create_picture_data(save_title, new_id, source.name, folder_path)
 
-        SaveDataService.update_picture_ids(save_title, ids)
+        SaveDataService.update_pictures_ids(save_title, ids)
         if new_id == 1:
             SaveDataService.update_current_picture_id(save_title, new_id)
+        return new_id
 
     @staticmethod
     def delete_picture(save_title, pid: int):
-        ids = SaveDataService.get_picture_ids(save_title)
+        ids = SaveDataService.get_pictures_ids(save_title)
         ids.remove(pid)
 
         folder = f"data\\{save_title}\\pictures\\{pid}"
@@ -55,7 +56,7 @@ class PictureDataService:
         folder_path = Path(f"data\\{save_title}\\pictures\\{pid}")
         folder_path.rmdir()
 
-        SaveDataService.update_picture_ids(save_title, ids)
+        SaveDataService.update_pictures_ids(save_title, ids)
 
     @staticmethod
     def _create_progress_picture(save_title, new_id):
@@ -79,7 +80,7 @@ class PictureDataService:
 
         data_path = folder_path / f"d-{new_id}.json"
         data_path.write_text("")
-        PictureDataService.update_picture_info(save_title, new_id, pic_info)
+        PictureDataService.update_picture_info(save_title, pic_info)
 
     @staticmethod
     def get_picture_info(save_title, p_id):
@@ -89,9 +90,9 @@ class PictureDataService:
         return picture
 
     @staticmethod
-    def update_picture_info(save_title, p_id, picture):
+    def update_picture_info(save_title, picture):
         picture_json = picture.to_dict()
-        with open(f"data\\{save_title}\\pictures\\{p_id}\\d-{p_id}.json", 'w', encoding='utf-8') as f:
+        with open(f"data\\{save_title}\\pictures\\{picture.id}\\d-{picture.id}.json", 'w', encoding='utf-8') as f:
             json.dump(picture_json, f, ensure_ascii=False, indent=2)
 
     @staticmethod

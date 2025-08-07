@@ -28,14 +28,14 @@ class SaveDataService:
             json.dump(save_json_new, f, ensure_ascii=False, indent=2)
 
     @staticmethod
-    def get_picture_ids(save_title):
+    def get_pictures_ids(save_title):
         with open(f"data\\{save_title}\\save.json", 'r', encoding='utf-8') as f:
             save_json = json.load(f)
         save = Save.from_dict(save_json)
         return save.pictures_ids
 
     @staticmethod
-    def update_picture_ids(save_title, pictures_ids):
+    def update_pictures_ids(save_title, pictures_ids):
         with open(f"data\\{save_title}\\save.json", 'r', encoding='utf-8') as f:
             save_json = json.load(f)
         save = Save.from_dict(save_json)

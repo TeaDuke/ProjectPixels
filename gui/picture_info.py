@@ -3,6 +3,7 @@ from PyQt6.QtGui import QPixmap, QIcon
 from PyQt6.QtWidgets import QWidget, QLabel, QVBoxLayout, QGridLayout, QSizePolicy, QPushButton, QHBoxLayout, \
     QMessageBox
 
+from enums.status_enum import StatusEnum
 from gui.custom_widgets.scalable_label import ScalableLabel
 from gui.custom_widgets.status_label import StatusLabel
 from services.picture_main_service import PictureMainService
@@ -11,6 +12,7 @@ from utilits.image_utilits import resource_path
 
 
 class PictureInfo(QWidget):
+    # to update info in pixels_info when current picture is changed
     upd_current_picture = pyqtSignal()
 
     current_id = 0
@@ -113,17 +115,14 @@ class PictureInfo(QWidget):
 
     def update_status_label(self):
         pic_info = PictureMainService.get_picture_info(self.active_id)
-        if pic_info.all_pixels == pic_info.opened_pixels and self.active_id == self.current_id:
-            self.status_label.setText("Finished (current)")
-            self.status_label.set_status_color("red")
-        elif pic_info.all_pixels == pic_info.opened_pixels:
+        if pic_info.status == StatusEnum.FINISHED:
             self.status_label.setText("Finished")
             self.status_label.set_status_color("GrEen")
-        elif self.active_id == self.current_id:
-            self.status_label.setText("Work (current)")
+        elif pic_info.status == StatusEnum.IN_PROGRESS:
+            self.status_label.setText("IN PROGRESS")
             self.status_label.set_status_color("red")
         else:
-            self.status_label.setText("Pause")
+            self.status_label.setText("STOPPED")
             self.status_label.set_status_color("velvet")
 
     def update_all_info(self):
@@ -154,6 +153,7 @@ class PictureInfo(QWidget):
 
     def reset_widget(self):
         self.active_id = PictureMainService.get_picture_info().id
+        self.current_id = SaveMainService.get_current_picture_id()
         self.pictures_ids = SaveMainService.get_pictures_ids()
         self.update_all_info()
 
@@ -179,7 +179,7 @@ class PictureInfo(QWidget):
         delete_id = self.active_id
 
         if self.active_id == self.current_id:
-            new_c_id = self._find_new_current_picture()
+            new_c_id = PictureMainService.find_new_current_picture()
             self.current_id = new_c_id
             self.active_id = self.current_id
             PictureMainService.update_current_picture_id(self.current_id)
@@ -197,22 +197,6 @@ class PictureInfo(QWidget):
         PictureMainService.delete_picture(delete_id)
         self.pictures_ids = SaveMainService.get_pictures_ids()
         self.update_all_info()
-
-
-    def _find_new_current_picture(self):
-        new_p_id = 0
-        for pid in self.pictures_ids:
-            pic_info = PictureMainService.get_picture_info(pid)
-            if pid != self.current_id and pic_info.all_pixels != pic_info.opened_pixels:
-                new_p_id = pid
-                break
-        if new_p_id == 0:
-            for pid in self.pictures_ids:
-                pic_info = PictureMainService.get_picture_info(pid)
-                if pid != self.current_id:
-                    new_p_id = pid
-                    break
-        return new_p_id
 
     def _check_possibilities_to_move(self):
         self.left_btn.setEnabled(True)

@@ -65,10 +65,11 @@ class PixelsInfo(QWidget):
             self,
             "Select a picture (jpg, png)",
             "",
-            "Images (*.png, *.jpg);"
+            "Image files (*.jpg *.jpeg *.png) |*.jpg; *.jpeg; *.png"
         )
         if pic_path:
             PictureMainService.add_new_picture(pic_path)
+            self.update_pixels_info()
 
     def update_pixels_info(self):
         pic_info = PictureMainService.get_picture_info()
