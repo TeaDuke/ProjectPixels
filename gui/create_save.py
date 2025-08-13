@@ -4,8 +4,12 @@ import psutil
 from PyQt6.QtCore import Qt, pyqtSignal
 from PyQt6.QtGui import QPixmap, QImage
 from PyQt6.QtWidgets import QWidget, QLineEdit, QPushButton, QLabel, QVBoxLayout, QHBoxLayout, QScrollArea, QSizePolicy, \
-    QFileDialog
+    QFileDialog, QGridLayout
 
+from consts import BACKGROUND, BACKGROUND_DARKER, TEXT, TEXT_SIZE
+from gui.custom_widgets.pp_button import PPButton
+from gui.custom_widgets.pp_entervalue import PPEnterValue
+from gui.custom_widgets.pp_lbl_and_btn import PPLblAndBtn
 from services.base_main_service import BaseMainService
 from services.picture_main_service import PictureMainService
 from utilits.filename_utilits import check_filename
@@ -32,60 +36,93 @@ class CreateSave(QWidget):
         self.logo = QLabel()
         self.pixmap = QPixmap()
 
-        self.save_title_le = QLineEdit()
+        self.save_pp_value = PPEnterValue()
 
-        self.add_picture_lbl = QLabel()
-        self.add_picture_btn = QPushButton()
+        self.picture_adding = PPLblAndBtn("default")
 
-        self.create_btn = QPushButton()
+        self.create_btn = PPButton(self)
 
         self.create_vbox = QVBoxLayout()
-        self.picture_hbox = QHBoxLayout()
+        self.picture_grid = QGridLayout()
         self.hbox = QHBoxLayout()
 
         self._settings()
+        self.setCss()
 
     def _settings(self):
+        self.setMinimumWidth(500)
+        self.setMinimumHeight(600)
 
+        self.saves_vbox.setAlignment(Qt.AlignmentFlag.AlignTop)
+        self.saves_vbox.setContentsMargins(0,0,0,0)
         self._create_list_of_saves()
         self.scroll_area.setWidgetResizable(True)
         self.scroll_area.setWidget(self.saves_container)
-        self.scroll_area.setFixedHeight(300)
+        self.scroll_area.setMinimumHeight(self.height()-100)
+        self.scroll_area.setMinimumWidth(200)
 
         self.pixmap = QPixmap.fromImage(QImage(resource_path("logo.png")))
-        self.pixmap = self.pixmap.scaled(100, 100, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
+        # self.pixmap = self.pixmap.scaled(200, 200, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
         self.logo.setPixmap(self.pixmap)
-        self.logo.setMaximumHeight(100)
+        self.logo.setMaximumHeight(200)
 
-        self.add_picture_lbl.setText("No picture")
-        self.add_picture_btn.setText("Add Picture")
-        self.add_picture_btn.clicked.connect(self._add_picture)
+        self.save_pp_value.setTextToLbl("Enter Save title:")
+
+        self.picture_adding.setTextToLbl("No picture")
+        self.picture_adding.setTextToBtn("Add picture")
+        self.picture_adding.btn_clicked.connect(self._add_picture)
 
         self.create_btn.setText("Create Save")
         self.create_btn.clicked.connect(self._create_save)
+        create_btn_hbox = QHBoxLayout()
+        create_btn_hbox.setContentsMargins(10,20,10,0)
+        create_btn_hbox.addWidget(self.create_btn)
 
-        self.picture_hbox.addWidget(self.add_picture_lbl)
-        self.picture_hbox.addWidget(self.add_picture_btn)
-
+        self.create_vbox.setAlignment(Qt.AlignmentFlag.AlignTop)
         self.create_vbox.addWidget(self.logo, alignment=Qt.AlignmentFlag.AlignHCenter)
-        self.create_vbox.addWidget(self.save_title_le)
-        self.create_vbox.addLayout(self.picture_hbox)
-        self.create_vbox.addWidget(self.create_btn)
+        self.create_vbox.addWidget(self.save_pp_value)
+        self.create_vbox.addWidget(self.picture_adding)
+        self.create_vbox.addLayout(create_btn_hbox)
 
         if len(self.saves) != 0:
             self.hbox.addWidget(self.scroll_area)
         widget = QWidget()
-        widget.setMaximumHeight(300)
+        widget.setMaximumHeight(self.height()-100)
+        widget.setMinimumWidth(200)
         widget.setLayout(self.create_vbox)
         self.hbox.addWidget(widget)
 
         self.setLayout(self.hbox)
 
+    def setCss(self):
+        self.setStyleSheet(f"""
+            CreateSave
+            {{
+                background: {BACKGROUND};
+            }}
+            QScrollArea
+            {{
+                background: {BACKGROUND_DARKER};
+                padding-bottom:10px;
+            }}
+            QLabel
+            {{
+                color: {TEXT};
+                font-size: {TEXT_SIZE};
+            }}
+        """)
+        self.scroll_area.setStyleSheet(f"""
+            PPButton
+            {{
+                margin: 10px 10px 0;
+            }}
+        """)
+
     def _create_list_of_saves(self):
         self.saves = BaseMainService.get_saves()
         self.save_buttons = []
         for index, save in enumerate(self.saves):
-            save_button = QPushButton()
+            save_button = PPButton(self, "stroke")
             save_button.setText(save)
             self.save_buttons.append(save_button)
             self.save_buttons[index].clicked.connect(lambda: self._open_save(self.sender().text()))
@@ -100,18 +137,18 @@ class CreateSave(QWidget):
         )
         if pic_path:
             self.picture_path = pic_path
-            self.add_picture_lbl.setText(self.picture_path)
+            self.picture_adding.setTextToLbl("Picture is added")
 
     def _open_save(self, title):
         self.current_save_chosen.emit(title)
         self.close()
 
     def _create_save(self): #TODO: check if title is creatable, forbidden symbols
-        if self.save_title_le.text() == "" or self.save_title_le.text() in self.saves:
+        if self.save_pp_value.getValueFromLE() == "" or self.save_pp_value.getValueFromLE() in self.saves:
             return
         if self.picture_path == "":
             return
-        title = self.save_title_le.text().strip()
+        title = self.save_pp_value.getValueFromLE().strip()
         if not check_filename(title):
             return
 

@@ -1,28 +1,32 @@
-from PyQt6.QtWidgets import QWidget, QLabel, QHBoxLayout, QGridLayout
+from PyQt6.QtCore import pyqtSignal, Qt
+from PyQt6.QtWidgets import QWidget, QLabel, QGridLayout
 
-from consts import *
-from gui.custom_widgets.pp_lineedit import PPLineEdit
+from consts import TEXT, TEXT_SIZE
+from gui.custom_widgets.pp_button import PPButton
 
 
-class PPEnterValue (QWidget):
+class PPLblAndBtn(QWidget):
 
-    def __init__(self):
+    btn_clicked = pyqtSignal()
+
+    def __init__(self, btn_type: str):
         super().__init__()
 
         self.lbl = QLabel()
-        self.pp_le = PPLineEdit()
+        self.pp_btn = PPButton(self, btn_type)
         self.grid = QGridLayout()
 
         self._settings()
         self.setCss()
 
     def _settings(self):
-
         self.lbl.setText("Something")
         self.lbl.setMinimumWidth(200)
 
+        self.pp_btn.clicked.connect(lambda : self.btn_clicked.emit())
+
         self.grid.addWidget(self.lbl, 0, 0)
-        self.grid.addWidget(self.pp_le, 0, 1)
+        self.grid.addWidget(self.pp_btn, 0, 1)
 
         self.setLayout(self.grid)
 
@@ -38,5 +42,5 @@ class PPEnterValue (QWidget):
     def setTextToLbl(self, text: str):
         self.lbl.setText(text)
 
-    def getValueFromLE(self):
-        return self.pp_le.text()
+    def setTextToBtn(self, text:str):
+        self.pp_btn.setText(text)

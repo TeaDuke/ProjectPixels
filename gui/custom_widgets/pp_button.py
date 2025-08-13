@@ -33,14 +33,17 @@ class PPButton (QPushButton):
                     border-radius: 8px;
                     padding: 6px 10px 6px 10px;
                     text-align: left;
+                    border: 1px solid {PRIMARY};
                 }}
                 PPButton:hover
                 {{
                     background-color: {SECONDARY};
+                    border: 1px solid {SECONDARY};
                 }}
                 PPButton:disabled
                 {{
                     background-color: {DISABLED};
+                    border: 1px solid {DISABLED};
                     color: rgba({TEXT_DARKER_R}, {TEXT_DARKER_G}, {TEXT_DARKER_B}, {TEXT_DARKER_A});
                 }}
             """)

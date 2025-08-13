@@ -5,6 +5,7 @@ from PyQt6.QtWidgets import QWidget, QMainWindow, QVBoxLayout, QSizePolicy, QTab
 from consts import BACKGROUND
 from enums.status_enum import StatusEnum
 from gui.custom_widgets.pp_button import PPButton
+from gui.custom_widgets.pp_checker import PPChecker
 from gui.custom_widgets.pp_dropdown import PPDropDown
 from gui.custom_widgets.pp_entervalue import PPEnterValue
 from gui.custom_widgets.pp_iconbutton import PPIconButton
@@ -38,7 +39,8 @@ class MainWindow(QWidget):
         self.pp_dd = PPDropDown()
         self.pp_info = PPInfo()
         self.pp_icon_btn = PPIconButton("stroke", "left")
-        self.pp_status_bar = PPStatusBar(self, StatusEnum.STOPPED)
+        self.pp_status_bar = PPStatusBar(self, StatusEnum.FINISHED)
+        self.pp_checker = PPChecker("Change mode")
 
         self.settings_window = Settings()
 
@@ -86,8 +88,8 @@ class MainWindow(QWidget):
         self.vbox.addWidget(self.pp_dd)
         self.vbox.addWidget(self.pp_info)
         self.vbox.addWidget(self.pp_icon_btn)
-        # self.pp_status_bar.setStyleSheet("background-color:red;")
         self.vbox.addWidget(self.pp_status_bar)
+        self.vbox.addWidget(self.pp_checker)
 
         self.vbox.addWidget(self.new_save_btn)
         self.vbox.addWidget(self.pxinfo)

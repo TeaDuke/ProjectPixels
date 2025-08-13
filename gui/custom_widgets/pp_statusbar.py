@@ -29,28 +29,51 @@ class PPStatusBar (QWidget):
     def _settings(self):
         self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
 
-        self.lbl1.setText("PAUSE // pause // PAUSE // pause // PAUSE // pause // PAUSE // pause // PAUSE // pause // ")
         self.lbl1.setFixedHeight(30)
         self.lbl1.move(self.width(), 0)
-
-        self.lbl2.setText("PAUSE // pause // PAUSE // pause // PAUSE // pause // PAUSE // pause //  PAUSE // pause // ")
         self.lbl2.setFixedHeight(30)
         self.lbl2.move(self.width(), 0)
+
+        if self.mode == StatusEnum.IN_PROGRESS:
+            self.lbl1.setText(
+                "IN PROGRESS // in progress // IN PROGRESS // in progress // IN PROGRESS // in progress // IN PROGRESS // in progress // ")
+            self.lbl2.setText(
+                "IN PROGRESS // in progress // IN PROGRESS // in progress // IN PROGRESS // in progress // IN PROGRESS // in progress // ")
+        elif self.mode == StatusEnum.STOPPED:
+            self.lbl1.setText(
+                "STOPPED // stopped // STOPPED // stopped // STOPPED // stopped // STOPPED // stopped // STOPPED // stopped // ")
+            self.lbl2.setText(
+                "STOPPED // stopped // STOPPED // stopped // STOPPED // stopped // STOPPED // stopped // STOPPED // stopped // ")
+        else:
+            self.lbl1.setText(
+                "FINISHED // finished // FINISHED // finished // FINISHED // finished // FINISHED // finished // FINISHED // finished // ")
+            self.lbl2.setText(
+                "FINISHED // finished // FINISHED // finished // FINISHED // finished // FINISHED // finished // FINISHED // finished // ")
 
         self.timer.timeout.connect(self._scroll)
         self.timer.start(20)
 
 
     def setCss(self):
+        background_color = ""
+
+        if self.mode == StatusEnum.IN_PROGRESS:
+            background_color = PRIMARY
+        elif self.mode == StatusEnum.STOPPED:
+            background_color = STOPPED
+        else:
+            background_color = FINISHED
+
         self.setStyleSheet(f"""
-            PPStatusBar 
-            {{
-                background-color: {PAUSE};
-            }}
             QLabel
             {{
                 color: {TEXT};
-                font-size: {TEXT_SIZE};
+                font-size: {TEXT_SIZE_2};
+                font-weight: bold;
+            }}
+            PPStatusBar 
+            {{
+                background-color: {background_color};
             }}
         """)
 
