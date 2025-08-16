@@ -50,6 +50,7 @@ class PictureInfo(QWidget):
         self._settings()
 
     def _settings(self):
+        self.setWindowTitle("Pictures information")
 
         self.active_id = PictureMainService.get_picture_info().id
         self.current_id = self.active_id

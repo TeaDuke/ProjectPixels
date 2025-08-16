@@ -14,18 +14,19 @@ class PPInfo (QWidget):
         self.vbox = QVBoxLayout()
 
         self._settings()
-        self.setCss()
+        self.set_css()
 
     def _settings(self):
         self.label_lbl.setText("Something")
         self.value_lbl.setText("1234")
 
+        self.vbox.setContentsMargins(0,0,0,0)
         self.vbox.addWidget(self.label_lbl)
         self.vbox.addWidget(self.value_lbl)
 
         self.setLayout(self.vbox)
 
-    def setCss(self):
+    def set_css(self):
         self.label_lbl.setStyleSheet(f"""
             QLabel
             {{
@@ -41,8 +42,8 @@ class PPInfo (QWidget):
             }}
         """)
 
-    def setLabel(self, text:str):
+    def set_label(self, text:str):
         self.label_lbl.setText(text)
 
-    def setValue(self, text:str):
+    def set_value(self, text:str):
         self.value_lbl.setText(text)

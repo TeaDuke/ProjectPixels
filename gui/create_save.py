@@ -8,7 +8,7 @@ from PyQt6.QtWidgets import QWidget, QLineEdit, QPushButton, QLabel, QVBoxLayout
 
 from consts import BACKGROUND, BACKGROUND_DARKER, TEXT, TEXT_SIZE
 from gui.custom_widgets.pp_button import PPButton
-from gui.custom_widgets.pp_entervalue import PPEnterValue
+from gui.custom_widgets.pp_enter_value import PPEnterValue
 from gui.custom_widgets.pp_lbl_and_btn import PPLblAndBtn
 from services.base_main_service import BaseMainService
 from services.picture_main_service import PictureMainService
@@ -47,9 +47,10 @@ class CreateSave(QWidget):
         self.hbox = QHBoxLayout()
 
         self._settings()
-        self.setCss()
+        self.set_css()
 
     def _settings(self):
+        self.setWindowTitle("Create or Choose Save")
         self.setMinimumWidth(500)
         self.setMinimumHeight(600)
 
@@ -66,10 +67,10 @@ class CreateSave(QWidget):
         self.logo.setPixmap(self.pixmap)
         self.logo.setMaximumHeight(200)
 
-        self.save_pp_value.setTextToLbl("Enter Save title:")
+        self.save_pp_value.set_text_to_lbl("Enter Save title:")
 
-        self.picture_adding.setTextToLbl("No picture")
-        self.picture_adding.setTextToBtn("Add picture")
+        self.picture_adding.set_text_to_lbl("No picture")
+        self.picture_adding.set_text_to_btn("Add picture")
         self.picture_adding.btn_clicked.connect(self._add_picture)
 
         self.create_btn.setText("Create Save")
@@ -94,7 +95,7 @@ class CreateSave(QWidget):
 
         self.setLayout(self.hbox)
 
-    def setCss(self):
+    def set_css(self):
         self.setStyleSheet(f"""
             CreateSave
             {{
@@ -137,18 +138,18 @@ class CreateSave(QWidget):
         )
         if pic_path:
             self.picture_path = pic_path
-            self.picture_adding.setTextToLbl("Picture is added")
+            self.picture_adding.set_text_to_lbl("Picture is added")
 
     def _open_save(self, title):
         self.current_save_chosen.emit(title)
         self.close()
 
     def _create_save(self): #TODO: check if title is creatable, forbidden symbols
-        if self.save_pp_value.getValueFromLE() == "" or self.save_pp_value.getValueFromLE() in self.saves:
+        if self.save_pp_value.get_value_from_le() == "" or self.save_pp_value.get_value_from_le() in self.saves:
             return
         if self.picture_path == "":
             return
-        title = self.save_pp_value.getValueFromLE().strip()
+        title = self.save_pp_value.get_value_from_le().strip()
         if not check_filename(title):
             return
 

@@ -1,7 +1,7 @@
 from PyQt6.QtWidgets import QWidget, QLabel, QHBoxLayout, QGridLayout
 
 from consts import *
-from gui.custom_widgets.pp_lineedit import PPLineEdit
+from gui.custom_widgets.pp_line_edit import PPLineEdit
 
 
 class PPEnterValue (QWidget):
@@ -14,7 +14,7 @@ class PPEnterValue (QWidget):
         self.grid = QGridLayout()
 
         self._settings()
-        self.setCss()
+        self.set_css()
 
     def _settings(self):
 
@@ -26,7 +26,7 @@ class PPEnterValue (QWidget):
 
         self.setLayout(self.grid)
 
-    def setCss(self):
+    def set_css(self):
         self.setStyleSheet(f"""
             QLabel
             {{
@@ -35,8 +35,11 @@ class PPEnterValue (QWidget):
             }}
         """)
 
-    def setTextToLbl(self, text: str):
+    def set_text_to_lbl(self, text: str):
         self.lbl.setText(text)
 
-    def getValueFromLE(self):
+    def set_text_to_le(self, text: str):
+        self.pp_le.setText(text)
+
+    def get_value_from_le(self):
         return self.pp_le.text()

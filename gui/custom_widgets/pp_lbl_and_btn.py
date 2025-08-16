@@ -17,7 +17,7 @@ class PPLblAndBtn(QWidget):
         self.grid = QGridLayout()
 
         self._settings()
-        self.setCss()
+        self.set_css()
 
     def _settings(self):
         self.lbl.setText("Something")
@@ -30,7 +30,7 @@ class PPLblAndBtn(QWidget):
 
         self.setLayout(self.grid)
 
-    def setCss(self):
+    def set_css(self):
         self.setStyleSheet(f"""
             QLabel
             {{
@@ -39,8 +39,8 @@ class PPLblAndBtn(QWidget):
             }}
         """)
 
-    def setTextToLbl(self, text: str):
+    def set_text_to_lbl(self, text: str):
         self.lbl.setText(text)
 
-    def setTextToBtn(self, text:str):
+    def set_text_to_btn(self, text:str):
         self.pp_btn.setText(text)

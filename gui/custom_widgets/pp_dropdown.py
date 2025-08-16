@@ -1,12 +1,13 @@
-from PyQt6.QtCore import Qt, QPoint
+from PyQt6.QtCore import Qt, QPoint, pyqtSignal
 from PyQt6.QtGui import QIcon, QAction
-from PyQt6.QtWidgets import QComboBox, QWidget, QMenu, QHBoxLayout
+from PyQt6.QtWidgets import QComboBox, QWidget, QMenu, QHBoxLayout, QSizePolicy
 from consts import *
 from gui.custom_widgets.pp_button import PPButton
 from utilits.image_utilits import resource_path
 
 
 class PPDropDown (QWidget):
+    currentTextChanged = pyqtSignal()
 
     selected_text = ""
     items = []
@@ -15,25 +16,27 @@ class PPDropDown (QWidget):
     def __init__(self):
         super().__init__()
 
-        self.pp_btn = PPButton("stroke")
+        self.pp_btn = PPButton(self, "stroke")
         self.menu = QMenu(self)
 
         self.hbox = QHBoxLayout()
 
         self._settings()
-        self.setCss()
+        self.set_css()
 
     def _settings(self):
 
         self.pp_btn.setIcon(QIcon(resource_path("chevron-down.svg")))
         self.pp_btn.setLayoutDirection(Qt.LayoutDirection.RightToLeft)
+        self.pp_btn.setSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Maximum)
         self.pp_btn.clicked.connect(self.show_menu)
 
+        self.hbox.setContentsMargins(0,0,0,0)
         self.hbox.addWidget(self.pp_btn)
 
         self.setLayout(self.hbox)
 
-    def setCss(self):
+    def set_css(self):
         self.setStyleSheet(f"""
             QMenu
             {{
@@ -60,7 +63,7 @@ class PPDropDown (QWidget):
             }}
         """)
 
-    def setItems(self, items):
+    def set_items(self, items):
         self.items = items
         for item in items:
             action = QAction(item, self)
@@ -71,7 +74,7 @@ class PPDropDown (QWidget):
             self.actions.append(action)
             self.menu.addAction(action)
 
-    def setCurrentText(self, text):
+    def set_current_text(self, text):
         if text in self.items:
             self.select_item(text)
 
@@ -84,17 +87,21 @@ class PPDropDown (QWidget):
         self.menu.exec()
 
     def select_item(self, text):
+        emit = False
         if self.selected_text != "":
-            action = self.actions[self._findIndexByText(self.selected_text)]
+            action = self.actions[self._find_index_by_text(self.selected_text)]
             action.setIconVisibleInMenu(False)
+            emit = True
         self.selected_text = text
-        action_ = self.actions[self._findIndexByText(text)]
+        action_ = self.actions[self._find_index_by_text(text)]
         action_.setIconVisibleInMenu(True)
         self.pp_btn.setText(self.selected_text)
+        if emit:
+            self.currentTextChanged.emit()
 
-    def getCurrentText(self):
+    def get_current_text(self):
         return self.selected_text
 
-    def _findIndexByText(self, text):
+    def _find_index_by_text(self, text):
         index = self.items.index(text)
         return index

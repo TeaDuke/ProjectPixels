@@ -1,17 +1,18 @@
 from PyQt6.QtCore import Qt, pyqtSignal
 from PyQt6.QtGui import QPalette, QColor, QIcon
-from PyQt6.QtWidgets import QWidget, QMainWindow, QVBoxLayout, QSizePolicy, QTabBar, QPushButton, QComboBox
+from PyQt6.QtWidgets import QWidget, QMainWindow, QVBoxLayout, QSizePolicy, QTabBar, QPushButton, QComboBox, \
+    QHBoxLayout, QFrame
 
-from consts import BACKGROUND
+from consts import BACKGROUND, BACKGROUND_LIGHTER
 from enums.status_enum import StatusEnum
 from gui.custom_widgets.pp_button import PPButton
 from gui.custom_widgets.pp_checker import PPChecker
 from gui.custom_widgets.pp_dropdown import PPDropDown
-from gui.custom_widgets.pp_entervalue import PPEnterValue
-from gui.custom_widgets.pp_iconbutton import PPIconButton
+from gui.custom_widgets.pp_enter_value import PPEnterValue
+from gui.custom_widgets.pp_icon_button import PPIconButton
 from gui.custom_widgets.pp_info import PPInfo
-from gui.custom_widgets.pp_lineedit import PPLineEdit
-from gui.custom_widgets.pp_statusbar import PPStatusBar
+from gui.custom_widgets.pp_line_edit import PPLineEdit
+from gui.custom_widgets.pp_status_bar import PPStatusBar
 from gui.pixels_info import PixelsInfo
 from gui.settings import Settings
 from gui.task_list import TaskList
@@ -31,74 +32,71 @@ class MainWindow(QWidget):
         super().__init__()
 
         # declare widgets
-        self.tabbar = QTabBar()
 
-        self.pp_btn = PPButton(self, "default")
-        self.pp_le = PPLineEdit()
-        self.pp_ev = PPEnterValue()
-        self.pp_dd = PPDropDown()
-        self.pp_info = PPInfo()
-        self.pp_icon_btn = PPIconButton("stroke", "left")
-        self.pp_status_bar = PPStatusBar(self, StatusEnum.FINISHED)
-        self.pp_checker = PPChecker("Change mode")
+        self.pp_saves_combo = PPDropDown()
+        self.pp_create_save_btn = PPButton(self, "stroke")
+        self.pp_settings_btn = PPIconButton("stroke", "settings")
 
         self.settings_window = Settings()
 
-        self.saves_combo = QComboBox()
-        self.new_save_btn = QPushButton()
-
         self.pxinfo = PixelsInfo()
-        self.tasklist = TaskList()
+        self.tasklist = TaskList(self)
 
+        self.line1 = QFrame()
+        self.line2 = QFrame()
+
+        self.hbox = QHBoxLayout()
         self.vbox = QVBoxLayout()
 
         self._settings()
-        self.setCss()
+        self.set_css()
 
     def _settings(self):
+        self.setWindowTitle("Project Pixels")
         self.resize(600,600)
+
 
         self.saves = BaseMainService.get_saves()
         self.current_save = BaseMainService.get_current_save()
 
-        self.tabbar.addTab("Settings")
-        self.tabbar.tabBarClicked.connect(self.tab_clicked)
+        self.pp_saves_combo.set_items(self.saves)
+        self.pp_saves_combo.set_current_text(self.current_save)
+        self.pp_saves_combo.currentTextChanged.connect(lambda: self._change_current_save(self.pp_saves_combo.get_current_text()))
 
-        self.saves_combo.addItems(self.saves)
-        self.saves_combo.setCurrentText(self.current_save)
-        self.saves_combo.currentTextChanged.connect(lambda: self._change_current_save(self.saves_combo.currentText()))
+        self.pp_create_save_btn.setText("Create new save")
+        self.pp_create_save_btn.setSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Maximum)
+        self.pp_create_save_btn.clicked.connect(self._open_create_save)
 
-        self.pp_btn.setText("PP button")
-        self.pp_ev.setTextToLbl("Task name:")
-        self.pp_dd.setMaximumWidth(200)
-        self.pp_dd.setItems(self.saves)
-        self.pp_dd.setCurrentText(self.current_save)
-
-        self.new_save_btn.setText("Create new Save")
-        self.new_save_btn.clicked.connect(self._open_create_save)
+        self.pp_settings_btn.clicked.connect(self.open_settings)
 
         self.tasklist.tasks_saved.connect(self.update_pixels_info)
+        self.tasklist.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Maximum)
 
-        self.vbox.addWidget(self.tabbar)
-        self.vbox.addWidget(self.saves_combo)
+        self.line1.setFrameShape(QFrame.Shape.HLine)
+        self.line1.setStyleSheet(f"""QFrame{{color: {BACKGROUND_LIGHTER};}}""")
+        self.line2.setFrameShape(QFrame.Shape.HLine)
+        self.line2.setStyleSheet(f"""QFrame{{color: {BACKGROUND_LIGHTER};}}""")
 
-        self.vbox.addWidget(self.pp_btn)
-        self.vbox.addWidget(self.pp_le)
-        self.vbox.addWidget(self.pp_ev)
-        self.vbox.addWidget(self.pp_dd)
-        self.vbox.addWidget(self.pp_info)
-        self.vbox.addWidget(self.pp_icon_btn)
-        self.vbox.addWidget(self.pp_status_bar)
-        self.vbox.addWidget(self.pp_checker)
+        self.hbox.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        self.hbox.setSpacing(20)
+        self.hbox.setContentsMargins(0,0,0,0)
+        self.hbox.addWidget(self.pp_saves_combo)
+        self.hbox.addWidget(self.pp_create_save_btn)
+        self.hbox.addStretch()
+        self.hbox.addWidget(self.pp_settings_btn)
 
-        self.vbox.addWidget(self.new_save_btn)
+        self.vbox.setContentsMargins(20,20,20,20)
+        self.vbox.setSpacing(20)
+        self.vbox.addLayout(self.hbox)
+        self.vbox.addWidget(self.line1)
         self.vbox.addWidget(self.pxinfo)
-        self.vbox.addWidget(self.tasklist)
+        self.vbox.addWidget(self.line2)
+        self.vbox.addWidget(self.tasklist, stretch=1)
         self.vbox.setAlignment(Qt.AlignmentFlag.AlignTop)
 
         self.setLayout(self.vbox)
 
-    def setCss(self):
+    def set_css(self):
         self.setStyleSheet(f"""
             MainWindow
             {{
@@ -109,7 +107,7 @@ class MainWindow(QWidget):
     def update_pixels_info(self):
         self.pxinfo.update_pixels_info()
 
-    def tab_clicked(self, index):
+    def open_settings(self, index):
         self.settings_window.update_settings()
         self.settings_window.show()
 

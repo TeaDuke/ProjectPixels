@@ -4,18 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d03fced-13b4-4431-b900-ce0971b747de" name="Changes" comment="some new GUI PP elements. update current picture behaviour. if picture is finished, cur pic is changed. if cur pic is deleted, cure pic is changed. and so on">
-      <change afterPath="$PROJECT_DIR$/gui/custom_widgets/pp_checker.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gui/custom_widgets/pp_lbl_and_btn.py" afterDir="false" />
+    <list default="true" id="6d03fced-13b4-4431-b900-ce0971b747de" name="Changes" comment="create save window's design">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/consts.py" beforeDir="false" afterPath="$PROJECT_DIR$/consts.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/base.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/base.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/Hollow/tasks.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/Hollow/tasks.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui/create_save.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/create_save.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui/custom_widgets/pp_button.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/custom_widgets/pp_button.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/custom_widgets/pp_entervalue.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/custom_widgets/pp_entervalue.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/custom_widgets/pp_lineedit.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/custom_widgets/pp_lineedit.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/custom_widgets/pp_statusbar.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/custom_widgets/pp_statusbar.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/custom_widgets/pp_checker.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/custom_widgets/pp_checker.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/custom_widgets/pp_dropdown.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/custom_widgets/pp_dropdown.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/custom_widgets/pp_entervalue.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/custom_widgets/pp_enter_value.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/custom_widgets/pp_iconbutton.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/custom_widgets/pp_icon_button.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/custom_widgets/pp_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/custom_widgets/pp_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/custom_widgets/pp_lbl_and_btn.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/custom_widgets/pp_lbl_and_btn.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/custom_widgets/pp_lineedit.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/custom_widgets/pp_line_edit.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/custom_widgets/pp_statusbar.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/custom_widgets/pp_status_bar.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui/main_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/main_window.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/picture_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/picture_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/pixels_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/pixels_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/task_changer.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/task_changer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/task_creator.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/task_creator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/task_list.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/task_list.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,24 +49,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.json_utilit.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.main_window.executor": "Run",
-    "Python.pickle_utilit.executor": "Run",
-    "Python.picture_data_service.executor": "Debug",
-    "Python.ppicture_utilit.executor": "Run",
-    "Python.start.executor": "Run",
-    "Python.task_list.executor": "Run",
-    "Python.test.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/maxch/Documents/projects/ProjectPixels",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.json_utilit.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main_window.executor&quot;: &quot;Run&quot;,
+    &quot;Python.pickle_utilit.executor&quot;: &quot;Run&quot;,
+    &quot;Python.picture_data_service.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.ppicture_utilit.executor&quot;: &quot;Run&quot;,
+    &quot;Python.start.executor&quot;: &quot;Run&quot;,
+    &quot;Python.task_list.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/maxch/Documents/projects/ProjectPixels&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\maxch\Documents\projects\ProjectPixels" />
@@ -273,7 +280,15 @@
       <option name="project" value="LOCAL" />
       <updated>1754575128902</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="create save window's design">
+      <option name="closed" value="true" />
+      <created>1755106094676</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1755106094676</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -307,18 +322,10 @@
     <MESSAGE value="changes for .exe file" />
     <MESSAGE value="PP gui elements. created button, line edit, dropdown and enter value (label + ppbutton)" />
     <MESSAGE value="some new GUI PP elements. update current picture behaviour. if picture is finished, cur pic is changed. if cur pic is deleted, cure pic is changed. and so on" />
-    <option name="LAST_COMMIT_MESSAGE" value="some new GUI PP elements. update current picture behaviour. if picture is finished, cur pic is changed. if cur pic is deleted, cure pic is changed. and so on" />
+    <MESSAGE value="create save window's design" />
+    <option name="LAST_COMMIT_MESSAGE" value="create save window's design" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/gui/picture_info.py</url>
-          <line>178</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
         <watch expression="self.buttons" />

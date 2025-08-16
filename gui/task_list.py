@@ -1,6 +1,7 @@
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QGridLayout, QPushButton, QSizePolicy
 from PyQt6.QtCore import pyqtSignal
 
+from consts import BACKGROUND_DARKER
 from data_classes.Task import Task
 from enums.mode_enum import ModeEnum
 from gui.custom_widgets.badge_button import BadgeButton
@@ -20,16 +21,20 @@ class TaskList(QWidget):
 
     mode = ModeEnum.GENERAL
 
+    parent = None
+
     tasks_saved = pyqtSignal()
 
-    def __init__(self):
+
+    def __init__(self, parent):
         super().__init__()
+        self.parent = parent
 
         self.container = QWidget()
 
-        self.save_btn = QPushButton()
-        self.change_btn = QPushButton()
-        self.add_btn = QPushButton()
+        self.save_btn = PPButton(self, "default")
+        self.change_btn = PPButton(self, "default") # TODO: change it to checker
+        self.create_btn = PPButton(self, "default")
 
         self.task_creator = TaskCreator()
         self.task_creator.task_created.connect(self.add_task)
@@ -38,42 +43,44 @@ class TaskList(QWidget):
         self.task_changer.task_updated.connect(self.update_task)
         self.task_changer.task_deleted.connect(self.delete_task)
 
-        self.pp_btn = PPButton(self, "default")
-
         self.hbox = QHBoxLayout()
         self.grid = QGridLayout()
         self.vbox = QVBoxLayout()
         self._settings()
 
     def _settings(self):
-        self.resize(300, 200)
-        self.setAutoFillBackground(True)
-        self.setPalette(get_palette(217,217,217))
-
         self.save_btn.setText("Save tasks")
         self.save_btn.clicked.connect(self.save_tasks)
         self.change_btn.setText("Change: Off")
         self.change_btn.clicked.connect(self.change_mode)
-        self.add_btn.setText("Add task")
-        self.add_btn.clicked.connect(self.open_task_creator)
-
-        self.pp_btn.setText("TEst button")
-        self.pp_btn.setBadgeFunctionality(True)
+        self.create_btn.setText("Add task")
+        self.create_btn.clicked.connect(self.open_task_creator)
 
         self.hbox.addWidget(self.save_btn)
         self.hbox.addWidget(self.change_btn)
-        self.hbox.addWidget(self.add_btn)
+        self.hbox.addWidget(self.create_btn)
 
         self._create_buttons()
 
+        self.grid.setSpacing(15)
+        self.grid.setContentsMargins(10,15,10,15)
         widget = QWidget()
+        widget.setMinimumWidth(self.parent.width()-40)
         widget.setLayout(self.grid)
-        widget.setAutoFillBackground(True)
-        widget.setPalette(get_palette(212, 44, 44))
+        widget.setStyleSheet("""
+            QGridLayout
+            {
+                background-color:red;
+            }
+        """)
+        widget.setStyleSheet(f"""
+            background: {BACKGROUND_DARKER};
+            border-radius: 10px;
+        """)
 
+        self.vbox.setContentsMargins(0,0,0,0)
         self.vbox.addLayout(self.hbox)
-        self.vbox.addWidget(self.pp_btn)
-        self.vbox.addWidget(widget)
+        self.vbox.addWidget(widget, stretch=1)
 
         self.setLayout(self.vbox)
         self.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
@@ -88,11 +95,14 @@ class TaskList(QWidget):
         self.buttons.clear()
         clear_layout(self.grid)
         for i in range(0, len(self.tasks)):
-            self.buttons.append(BadgeButton(f"{self.tasks[i].name}", self.tasks[i], self))
+            pp_btn = PPButton(self, "stroke")
+            pp_btn.set_badge_functionality(True, self.tasks[i])
+            pp_btn.setText(f"{self.tasks[i].name}")
+            self.buttons.append(pp_btn)
             if self.tasks[i].tid in finished_tasks.keys():
                 self.buttons[i].set_badge_number(finished_tasks[self.tasks[i].tid])
             self.buttons[i].clicked.connect(self.button_buffer)
-            self.grid.addWidget(self.buttons[i], i // 2, i % 2)
+            self.grid.addWidget(self.buttons[i], i // 3, i % 3)
         self.grid.update()
 
     def open_task_creator(self):

@@ -1,6 +1,6 @@
 from PyQt6.QtCore import Qt, QRect
 from PyQt6.QtGui import QPainter, QColor, QFont
-from PyQt6.QtWidgets import QPushButton
+from PyQt6.QtWidgets import QPushButton, QSizePolicy
 
 import consts
 from consts import *
@@ -20,9 +20,9 @@ class PPButton (QPushButton):
         super().__init__()
         self.parent = parent
         self.btn_type = btn_type.lower()
-        self.setCss()
+        self.set_css()
 
-    def setCss(self):
+    def set_css(self):
         if self.btn_type == "default":
             self.setStyleSheet(f"""
                 PPButton
@@ -91,7 +91,7 @@ class PPButton (QPushButton):
 
         super().mousePressEvent(event)
 
-    def setBadgeFunctionality(self, badge: bool, task = None):
+    def set_badge_functionality(self, badge: bool, task = None):
         self.badge = badge
         self.task = task
 

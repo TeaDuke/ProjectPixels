@@ -10,9 +10,9 @@ class PPChecker (QCheckBox):
         self.setText(label_text)
         self.setFixedHeight(30)
         self.setLayoutDirection(Qt.LayoutDirection.RightToLeft)
-        self.setCss()
+        self.set_css()
 
-    def setCss(self):
+    def set_css(self):
         self.setStyleSheet(f"""
             PPChecker
             {{

@@ -15,10 +15,10 @@ class PPIconButton(QPushButton):
         super().__init__()
         self.btn_type = btn_type.lower()
         self.icon_type = icon_type.lower()
-        self._updateIcon()
-        self.setCss()
+        self._update_icon()
+        self.set_css()
 
-    def setCss(self):
+    def set_css(self):
         if self.btn_type == "default":
             self.setStyleSheet(f"""
                 PPIconButton
@@ -65,11 +65,11 @@ class PPIconButton(QPushButton):
                 }}
             """)
 
-    def setIconType(self, icon_type: str = "left"):
+    def set_icon_type(self, icon_type: str = "left"):
         self.icon_type = icon_type.lower()
-        self._updateIcon()
+        self._update_icon()
 
-    def _updateIcon(self):
+    def _update_icon(self):
         if self.icon_type == "left":
             self.setIcon(QIcon(resource_path("chevron-left.svg")))
         elif self.icon_type == "right":
@@ -79,4 +79,9 @@ class PPIconButton(QPushButton):
         elif self.icon_type == "settings":
             self.setIcon(QIcon(resource_path("cog.svg")))
         self.setIconSize(QSize(24,24))
+
+    def resizeEvent(self, event):
+        size = min(event.size().width(), event.size().height())
+        self.setFixedSize(size, size)
+        super().resizeEvent(event)
 

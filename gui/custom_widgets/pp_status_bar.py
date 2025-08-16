@@ -24,7 +24,7 @@ class PPStatusBar (QWidget):
         self.timer = QTimer(self)
 
         self._settings()
-        self.setCss()
+        self.set_css()
 
     def _settings(self):
         self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
@@ -54,7 +54,7 @@ class PPStatusBar (QWidget):
         self.timer.start(20)
 
 
-    def setCss(self):
+    def set_css(self):
         background_color = ""
 
         if self.mode == StatusEnum.IN_PROGRESS:

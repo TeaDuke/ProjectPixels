@@ -59,6 +59,11 @@
       "tid": 12,
       "name": "carrot",
       "price": 4
+    },
+    {
+      "tid": 13,
+      "name": "tatarstan",
+      "price": 100
     }
   ]
 }

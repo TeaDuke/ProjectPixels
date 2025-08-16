@@ -8,9 +8,9 @@ class PPLineEdit (QLineEdit):
     def __init__(self):
         super().__init__()
         self.setMinimumWidth(120)
-        self.setCss()
+        self.set_css()
 
-    def setCss(self):
+    def set_css(self):
         self.setStyleSheet(f"""
             PPLineEdit
             {{
