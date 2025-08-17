@@ -3,9 +3,13 @@ from PyQt6.QtGui import QPixmap, QIcon
 from PyQt6.QtWidgets import QWidget, QLabel, QVBoxLayout, QGridLayout, QSizePolicy, QPushButton, QHBoxLayout, \
     QMessageBox
 
+from consts import BACKGROUND_DARKER, BACKGROUND
 from enums.status_enum import StatusEnum
+from gui.custom_widgets.pp_icon_button import PPIconButton
+from gui.custom_widgets.pp_info import PPInfo
 from gui.custom_widgets.scalable_label import ScalableLabel
 from gui.custom_widgets.status_label import StatusLabel
+from gui.custom_widgets.pp_status_bar import PPStatusBar
 from services.picture_main_service import PictureMainService
 from services.save_main_service import SaveMainService
 from utilits.image_utilits import resource_path
@@ -23,50 +27,42 @@ class PictureInfo(QWidget):
         super().__init__()
 
         self.status_label = StatusLabel()
+        self.status_bar = PPStatusBar(self, StatusEnum.STOPPED)
 
-        self.left_btn = QPushButton()
-        self.right_btn = QPushButton()
+        self.left_btn = PPIconButton("default", "left")
+        self.right_btn = PPIconButton("default", "right")
 
         self.picture = ScalableLabel()
         self.pixmap = QPixmap()
 
-        self.opened_info_lbl = QLabel()
-        self.opened_value_lbl = QLabel()
-        self.left_info_lbl = QLabel()
-        self.left_value_lbl = QLabel()
-        self.all_info_lbl = QLabel()
-        self.all_value_lbl = QLabel()
+        self.pp_all_pixels_info = PPInfo()
+        self.pp_painted_pixels_info = PPInfo()
+        self.pp_remaining_pixels_info = PPInfo()
 
-        self.delete_btn = QPushButton()
+        self.delete_btn = PPIconButton("stroke", "delete")
 
         self.hbox_status = QHBoxLayout()
-
         self.hbox = QHBoxLayout()
-
-        self.grid = QGridLayout()
-
+        self.hbox_info = QHBoxLayout()
         self.vbox = QVBoxLayout()
 
         self._settings()
+        self.set_css()
 
     def _settings(self):
         self.setWindowTitle("Pictures information")
+        self.resize(400, 400)
 
         self.active_id = PictureMainService.get_picture_info().id
         self.current_id = self.active_id
         self.pictures_ids = SaveMainService.get_pictures_ids()
 
-        self.left_btn.setIcon(QIcon(resource_path("chevron-left.svg")))
-        self.left_btn.setIconSize(QSize(48,48))
         self.left_btn.clicked.connect(lambda: self._change_picture("left"))
-        self.right_btn.setIcon(QIcon(resource_path("chevron-right.svg")))
-        self.right_btn.setIconSize(QSize(48,48))
         self.right_btn.clicked.connect(lambda: self._change_picture("right"))
         self._check_possibilities_to_move()
 
-        self.picture.setMinimumSize(200, 100)
+        self.picture.setMinimumSize(200, 200)
         self.picture.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
-        self.picture.setStyleSheet("border: 1px solid red; padding: 2px;")
         self.update_progress_picture()
 
         self.status_label.clicked.connect(self._update_current_picture)
@@ -74,31 +70,49 @@ class PictureInfo(QWidget):
 
         self.hbox_status.addWidget(self.status_label)
 
+        self.hbox.setContentsMargins(0,0,0,0)
         self.hbox.addWidget(self.left_btn)
-        self.hbox.addWidget(self.picture, stretch=1)
+        self.hbox.addWidget(self.picture)
         self.hbox.addWidget(self.right_btn)
 
-        self.opened_info_lbl.setText("Painter pixels:")
-        self.left_info_lbl.setText("Left pixels:")
-        self.all_info_lbl.setText("All pixels:")
+        self.pp_all_pixels_info.set_label("All pixels")
+        self.pp_painted_pixels_info.set_label("Painted pixels")
+        self.pp_remaining_pixels_info.set_label("Remaining pixels")
+
         self.update_pixels_info()
 
-        self.delete_btn.setText("Delete this picture")
         self.delete_btn.clicked.connect(self._delete_picture)
 
-        self.grid.addWidget(self.opened_info_lbl, 0, 0)
-        self.grid.addWidget(self.opened_value_lbl, 0, 1)
-        self.grid.addWidget(self.left_info_lbl, 1, 0)
-        self.grid.addWidget(self.left_value_lbl, 1, 1)
-        self.grid.addWidget(self.all_info_lbl, 2, 0)
-        self.grid.addWidget(self.all_value_lbl, 2, 1)
-        self.grid.addWidget(self.delete_btn, 0, 3, 3, 1)
+        self.hbox_info.setSpacing(20)
+        self.hbox_info.setContentsMargins(20,10,20,10)
+        self.hbox_info.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        self.hbox_info.addWidget(self.pp_all_pixels_info)
+        self.hbox_info.addWidget(self.pp_painted_pixels_info)
+        self.hbox_info.addWidget(self.pp_remaining_pixels_info)
+        self.hbox_info.addStretch()
+        self.hbox_info.addWidget(self.delete_btn)
 
+        widget = QWidget()
+        widget.setLayout(self.hbox_info)
+        widget.setStyleSheet(f"""
+            background-color: {BACKGROUND_DARKER};
+            border-radius: 10px;
+        """)
+
+        self.vbox.addWidget(self.status_bar)
         self.vbox.addLayout(self.hbox_status)
-        self.vbox.addLayout(self.hbox, stretch=1)
-        self.vbox.addLayout(self.grid)
+        self.vbox.addLayout(self.hbox)
+        self.vbox.addWidget(widget)
 
         self.setLayout(self.vbox)
+
+    def set_css(self):
+        self.setStyleSheet(f"""
+            PictureInfo
+            {{
+                background-color: {BACKGROUND};
+            }}
+        """)
 
     def update_progress_picture(self):
         ppic = PictureMainService.get_progress_picture(self.active_id)
@@ -107,11 +121,10 @@ class PictureInfo(QWidget):
 
     def update_pixels_info(self):
         pic_info = PictureMainService.get_picture_info(self.active_id)
-        self.opened_value_lbl.setText(f"{pic_info.opened_pixels}")
-        all_pixels = pic_info.all_pixels
-        self.all_value_lbl.setText(f"{all_pixels}")
-        left_pixels = all_pixels - pic_info.opened_pixels
-        self.left_value_lbl.setText(f"{left_pixels}")
+        self.pp_all_pixels_info.set_value(f"{pic_info.all_pixels}")
+        self.pp_painted_pixels_info.set_value(f"{pic_info.opened_pixels}")
+        remaining_pixels = pic_info.all_pixels - pic_info.opened_pixels
+        self.pp_remaining_pixels_info.set_value(f"{remaining_pixels}")
 
 
     def update_status_label(self):

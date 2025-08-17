@@ -8,8 +8,9 @@ class PPChecker (QCheckBox):
     def __init__(self, label_text: str):
         super().__init__()
         self.setText(label_text)
-        self.setFixedHeight(30)
+        # self.setFixedHeight(30)
         self.setLayoutDirection(Qt.LayoutDirection.RightToLeft)
+        self.setCursor(Qt.CursorShape.PointingHandCursor)
         self.set_css()
 
     def set_css(self):
@@ -18,6 +19,9 @@ class PPChecker (QCheckBox):
             {{
                 color: {TEXT};
                 font-size: {TEXT_SIZE};
+                background-color: {BACKGROUND_DARKER};
+                border-radius: 10px;
+                padding: 5px;  
             }}
             PPChecker::indicator
             {{

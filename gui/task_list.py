@@ -1,11 +1,12 @@
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QGridLayout, QPushButton, QSizePolicy
-from PyQt6.QtCore import pyqtSignal
+from PyQt6.QtCore import pyqtSignal, Qt
 
 from consts import BACKGROUND_DARKER
 from data_classes.Task import Task
 from enums.mode_enum import ModeEnum
 from gui.custom_widgets.badge_button import BadgeButton
 from gui.custom_widgets.pp_button import PPButton
+from gui.custom_widgets.pp_checker import PPChecker
 from gui.task_changer import TaskChanger
 from gui.task_creator import TaskCreator
 from services.picture_main_service import PictureMainService
@@ -33,8 +34,8 @@ class TaskList(QWidget):
         self.container = QWidget()
 
         self.save_btn = PPButton(self, "default")
-        self.change_btn = PPButton(self, "default") # TODO: change it to checker
         self.create_btn = PPButton(self, "default")
+        self.change_checker = PPChecker("Change mode")
 
         self.task_creator = TaskCreator()
         self.task_creator.task_created.connect(self.add_task)
@@ -51,14 +52,18 @@ class TaskList(QWidget):
     def _settings(self):
         self.save_btn.setText("Save tasks")
         self.save_btn.clicked.connect(self.save_tasks)
-        self.change_btn.setText("Change: Off")
-        self.change_btn.clicked.connect(self.change_mode)
+        self.save_btn.setSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Maximum)
         self.create_btn.setText("Add task")
         self.create_btn.clicked.connect(self.open_task_creator)
+        self.create_btn.setSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Maximum)
+        self.change_checker.clicked.connect(self.change_mode)
 
+        self.hbox.setSpacing(20)
+        self.hbox.setContentsMargins(0,0,0,0)
+        self.hbox.setAlignment(Qt.AlignmentFlag.AlignLeft)
         self.hbox.addWidget(self.save_btn)
-        self.hbox.addWidget(self.change_btn)
         self.hbox.addWidget(self.create_btn)
+        self.hbox.addWidget(self.change_checker)
 
         self._create_buttons()
 
@@ -67,20 +72,15 @@ class TaskList(QWidget):
         widget = QWidget()
         widget.setMinimumWidth(self.parent.width()-40)
         widget.setLayout(self.grid)
-        widget.setStyleSheet("""
-            QGridLayout
-            {
-                background-color:red;
-            }
-        """)
         widget.setStyleSheet(f"""
             background: {BACKGROUND_DARKER};
             border-radius: 10px;
         """)
 
         self.vbox.setContentsMargins(0,0,0,0)
+        self.vbox.setSpacing(20)
         self.vbox.addLayout(self.hbox)
-        self.vbox.addWidget(widget, stretch=1)
+        self.vbox.addWidget(widget)
 
         self.setLayout(self.vbox)
         self.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
@@ -143,12 +143,8 @@ class TaskList(QWidget):
     def change_mode(self):
         if self.mode == ModeEnum.GENERAL:
             self.mode = ModeEnum.CHANGE
-            self.change_btn.setStyleSheet("background-color: red")
-            self.change_btn.setText("Change: On")
         elif self.mode == ModeEnum.CHANGE:
             self.mode = ModeEnum.GENERAL
-            self.change_btn.setStyleSheet("")
-            self.change_btn.setText("Change: Off")
 
     def close_windows(self):
         self.task_creator.close()
