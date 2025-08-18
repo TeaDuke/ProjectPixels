@@ -8,7 +8,6 @@ from enums.status_enum import StatusEnum
 from gui.custom_widgets.pp_icon_button import PPIconButton
 from gui.custom_widgets.pp_info import PPInfo
 from gui.custom_widgets.scalable_label import ScalableLabel
-from gui.custom_widgets.status_label import StatusLabel
 from gui.custom_widgets.pp_status_bar import PPStatusBar
 from services.picture_main_service import PictureMainService
 from services.save_main_service import SaveMainService
@@ -26,7 +25,6 @@ class PictureInfo(QWidget):
     def __init__(self):
         super().__init__()
 
-        self.status_label = StatusLabel()
         self.status_bar = PPStatusBar(self, StatusEnum.STOPPED)
 
         self.left_btn = PPIconButton("default", "left")
@@ -41,9 +39,9 @@ class PictureInfo(QWidget):
 
         self.delete_btn = PPIconButton("stroke", "delete")
 
-        self.hbox_status = QHBoxLayout()
         self.hbox = QHBoxLayout()
         self.hbox_info = QHBoxLayout()
+        self.vbox_inner = QVBoxLayout()
         self.vbox = QVBoxLayout()
 
         self._settings()
@@ -65,10 +63,8 @@ class PictureInfo(QWidget):
         self.picture.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
         self.update_progress_picture()
 
-        self.status_label.clicked.connect(self._update_current_picture)
-        self.update_status_label()
-
-        self.hbox_status.addWidget(self.status_label)
+        self.status_bar.clicked.connect(self._update_current_picture)
+        self.update_status_bar()
 
         self.hbox.setContentsMargins(0,0,0,0)
         self.hbox.addWidget(self.left_btn)
@@ -99,10 +95,16 @@ class PictureInfo(QWidget):
             border-radius: 10px;
         """)
 
+        # self.vbox_inner.setContentsMargins(0, 0, 0, 0)
+        # self.vbox_inner.addWidget(self.status_bar)
+        self.vbox_inner.setContentsMargins(10,10,10,10)
+        self.vbox_inner.setSpacing(10)
+        self.vbox_inner.addLayout(self.hbox)
+        self.vbox_inner.addWidget(widget)
+
+        self.vbox.setContentsMargins(0,0,0,0)
         self.vbox.addWidget(self.status_bar)
-        self.vbox.addLayout(self.hbox_status)
-        self.vbox.addLayout(self.hbox)
-        self.vbox.addWidget(widget)
+        self.vbox.addLayout(self.vbox_inner)
 
         self.setLayout(self.vbox)
 
@@ -127,22 +129,14 @@ class PictureInfo(QWidget):
         self.pp_remaining_pixels_info.set_value(f"{remaining_pixels}")
 
 
-    def update_status_label(self):
+    def update_status_bar(self):
         pic_info = PictureMainService.get_picture_info(self.active_id)
-        if pic_info.status == StatusEnum.FINISHED:
-            self.status_label.setText("Finished")
-            self.status_label.set_status_color("GrEen")
-        elif pic_info.status == StatusEnum.IN_PROGRESS:
-            self.status_label.setText("IN PROGRESS")
-            self.status_label.set_status_color("red")
-        else:
-            self.status_label.setText("STOPPED")
-            self.status_label.set_status_color("velvet")
+        self.status_bar.set_status(pic_info.status)
 
     def update_all_info(self):
         self.update_progress_picture()
         self.update_pixels_info()
-        self.update_status_label()
+        self.update_status_bar()
         self._check_possibilities_to_move()
         self._check_possibilities_to_delete()
 

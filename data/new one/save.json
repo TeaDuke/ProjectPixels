@@ -1,0 +1,9 @@
+{
+  "title": "new one",
+  "pictures_ids": [
+    1,
+    2
+  ],
+  "current_picture_id": 2,
+  "opening_mode": "line"
+}

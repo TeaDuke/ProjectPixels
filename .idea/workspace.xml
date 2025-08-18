@@ -4,13 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d03fced-13b4-4431-b900-ce0971b747de" name="Changes" comment="almost finish main window. spacing in layouts is interesting. finish is soon">
+    <list default="true" id="6d03fced-13b4-4431-b900-ce0971b747de" name="Changes" comment="finish main window, started picture info window">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chevron-left.svg" beforeDir="false" afterPath="$PROJECT_DIR$/chevron-left.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chevron-right.svg" beforeDir="false" afterPath="$PROJECT_DIR$/chevron-right.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/custom_widgets/pp_checker.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/custom_widgets/pp_checker.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/base.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/base.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/create_save.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/create_save.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/custom_widgets/pp_status_bar.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/custom_widgets/pp_status_bar.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/main_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/main_window.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gui/picture_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/picture_info.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/task_list.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/task_list.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/pixels_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/pixels_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/picture_main_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/services/picture_main_service.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -284,7 +287,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755354833634</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="finish main window, started picture info window">
+      <option name="closed" value="true" />
+      <created>1755442593942</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1755442593942</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -320,9 +331,19 @@
     <MESSAGE value="some new GUI PP elements. update current picture behaviour. if picture is finished, cur pic is changed. if cur pic is deleted, cure pic is changed. and so on" />
     <MESSAGE value="create save window's design" />
     <MESSAGE value="almost finish main window. spacing in layouts is interesting. finish is soon" />
-    <option name="LAST_COMMIT_MESSAGE" value="almost finish main window. spacing in layouts is interesting. finish is soon" />
+    <MESSAGE value="finish main window, started picture info window" />
+    <option name="LAST_COMMIT_MESSAGE" value="finish main window, started picture info window" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/services/picture_main_service.py</url>
+          <line>21</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
         <watch expression="self.buttons" />

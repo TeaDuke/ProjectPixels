@@ -29,7 +29,6 @@ class PixelsInfo(QWidget):
 
     def _settings(self):
 
-
         self.open_picture_btn.setText("Open picture")
         self.open_picture_btn.clicked.connect(self.open_picture)
         self.open_picture_btn.setSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Maximum)
@@ -39,8 +38,11 @@ class PixelsInfo(QWidget):
         self.add_picture_btn.setSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Maximum)
 
         self.pp_all_pixels_info.set_label("All pixels")
+        self.pp_all_pixels_info.setSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Maximum)
         self.pp_painted_pixels_info.set_label("Painted pixels")
+        self.pp_painted_pixels_info.setSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Maximum)
         self.pp_remaining_pixels_info.set_label("Remaining pixels")
+        self.pp_remaining_pixels_info.setSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Maximum)
 
         self.update_pixels_info()
 

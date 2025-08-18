@@ -1,4 +1,4 @@
-from PyQt6.QtCore import QTimer, Qt
+from PyQt6.QtCore import QTimer, Qt, pyqtSignal
 from PyQt6.QtWidgets import QWidget, QLabel, QHBoxLayout, QSizePolicy
 
 from consts import *
@@ -6,6 +6,7 @@ from enums.status_enum import StatusEnum
 
 
 class PPStatusBar (QWidget):
+    clicked = pyqtSignal()
 
     parent = None
     mode = StatusEnum.IN_PROGRESS
@@ -13,8 +14,8 @@ class PPStatusBar (QWidget):
 
     def __init__(self, parent, mode: StatusEnum):
         super().__init__()
-        self.setFixedHeight(30)
-        self.setFixedWidth(parent.width())
+        self.setFixedHeight(32)
+        # self.setFixedWidth(parent.width())
         self.parent = parent
         self.mode = mode
 
@@ -34,21 +35,7 @@ class PPStatusBar (QWidget):
         self.lbl2.setFixedHeight(30)
         self.lbl2.move(self.width(), 0)
 
-        if self.mode == StatusEnum.IN_PROGRESS:
-            self.lbl1.setText(
-                "IN PROGRESS // in progress // IN PROGRESS // in progress // IN PROGRESS // in progress // IN PROGRESS // in progress // ")
-            self.lbl2.setText(
-                "IN PROGRESS // in progress // IN PROGRESS // in progress // IN PROGRESS // in progress // IN PROGRESS // in progress // ")
-        elif self.mode == StatusEnum.STOPPED:
-            self.lbl1.setText(
-                "STOPPED // stopped // STOPPED // stopped // STOPPED // stopped // STOPPED // stopped // STOPPED // stopped // ")
-            self.lbl2.setText(
-                "STOPPED // stopped // STOPPED // stopped // STOPPED // stopped // STOPPED // stopped // STOPPED // stopped // ")
-        else:
-            self.lbl1.setText(
-                "FINISHED // finished // FINISHED // finished // FINISHED // finished // FINISHED // finished // FINISHED // finished // ")
-            self.lbl2.setText(
-                "FINISHED // finished // FINISHED // finished // FINISHED // finished // FINISHED // finished // FINISHED // finished // ")
+        self.set_status(self.mode)
 
         self.timer.timeout.connect(self._scroll)
         self.timer.start(20)
@@ -86,3 +73,26 @@ class PPStatusBar (QWidget):
         if self.lbl2.x() > self.width():
             self.lbl2.move(self.lbl1.x() - self.lbl2.width(), 0)
 
+    def set_status(self, st: StatusEnum):
+        self.mode = st
+        if self.mode == StatusEnum.IN_PROGRESS:
+            self.lbl1.setText(
+                "IN PROGRESS // in progress // IN PROGRESS // in progress // IN PROGRESS // in progress // IN PROGRESS // in progress // " * 3)
+            self.lbl2.setText(
+                "IN PROGRESS // in progress // IN PROGRESS // in progress // IN PROGRESS // in progress // IN PROGRESS // in progress // " * 3)
+        elif self.mode == StatusEnum.STOPPED:
+            self.lbl1.setText(
+                "STOPPED // stopped // STOPPED // stopped // STOPPED // stopped // STOPPED // stopped // STOPPED // stopped // " * 3)
+            self.lbl2.setText(
+                "STOPPED // stopped // STOPPED // stopped // STOPPED // stopped // STOPPED // stopped // STOPPED // stopped // " * 3)
+        else:
+            self.lbl1.setText(
+                "FINISHED // finished // FINISHED // finished // FINISHED // finished // FINISHED // finished // FINISHED // finished // " * 3)
+            self.lbl2.setText(
+                "FINISHED // finished // FINISHED // finished // FINISHED // finished // FINISHED // finished // FINISHED // finished // " * 3)
+        self.set_css()
+
+    def mousePressEvent(self, event):
+        if event.button() == Qt.MouseButton.LeftButton:
+            self.clicked.emit()
+        super().mousePressEvent(event)

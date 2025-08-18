@@ -19,6 +19,8 @@ class PictureMainService:
         new_id = PictureDataService.add_new_picture(current_save, pic_path)
         current_pic_id = SaveDataService.get_current_picture_id(current_save)
         current_pic_info =  PictureDataService.get_picture_info(current_save, current_pic_id)
+        if new_id == current_pic_id:
+            PictureMainService.update_picture_status(new_id, StatusEnum.IN_PROGRESS)
         if new_id != current_pic_id and current_pic_info.status == StatusEnum.FINISHED:
             PictureMainService.update_current_picture_id(new_id)
 
@@ -53,7 +55,7 @@ class PictureMainService:
                 PictureMainService.update_current_picture_id(new_current_pic_id)
 
         # update picture info and progress picture
-        PictureDataService.update_picture_info(current_save, pic_info)
+        PictureMainService.update_picture_info(pic_info)
         PictureDataService.update_progress_picture(current_save, pic_id, ppic)
 
     @staticmethod
@@ -100,6 +102,11 @@ class PictureMainService:
         return PictureDataService.get_picture_info(current_save, pic_id)
 
     @staticmethod
+    def update_picture_info(pic_info: Picture):
+        current_save = BaseDataService.get_current_save()
+        PictureDataService.update_picture_info(current_save, pic_info)
+
+    @staticmethod
     def get_progress_picture(pic_id = 0):
         current_save = BaseDataService.get_current_save()
         if pic_id == 0:
@@ -115,7 +122,7 @@ class PictureMainService:
         old_current_picture_info = PictureDataService.get_picture_info(current_save, old_current_picture_id)
         if old_current_picture_info.status == StatusEnum.IN_PROGRESS:
             old_current_picture_info.status = StatusEnum.STOPPED
-        PictureDataService.update_picture_info(current_save, old_current_picture_info)
+        PictureMainService.update_picture_info(old_current_picture_info)
 
         # update current picture
         SaveDataService.update_current_picture_id(current_save, current_picture_id)
@@ -124,7 +131,7 @@ class PictureMainService:
         new_current_picture_info = PictureDataService.get_picture_info(current_save, current_picture_id)
         if new_current_picture_info.status == StatusEnum.STOPPED:
             new_current_picture_info.status = StatusEnum.IN_PROGRESS
-        PictureDataService.update_picture_info(current_save, new_current_picture_info)
+        PictureMainService.update_picture_info(new_current_picture_info)
 
     @staticmethod
     def find_new_current_picture():
@@ -144,6 +151,13 @@ class PictureMainService:
                     new_p_id = pid
                     break
         return new_p_id
+
+    @staticmethod
+    def update_picture_status(pic_id, status: StatusEnum):
+        pic_info = PictureMainService.get_picture_info(pic_id)
+        pic_info.status = status
+        PictureMainService.update_picture_info(pic_info)
+
 
 
 

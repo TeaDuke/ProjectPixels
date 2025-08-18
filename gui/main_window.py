@@ -85,14 +85,14 @@ class MainWindow(QWidget):
         self.hbox.addStretch()
         self.hbox.addWidget(self.pp_settings_btn)
 
+        self.vbox.setAlignment(Qt.AlignmentFlag.AlignTop)
         self.vbox.setContentsMargins(20,20,20,20)
         self.vbox.setSpacing(20)
         self.vbox.addLayout(self.hbox)
         self.vbox.addWidget(self.line1)
         self.vbox.addWidget(self.pxinfo)
         self.vbox.addWidget(self.line2)
-        self.vbox.addWidget(self.tasklist, stretch=1)
-        self.vbox.setAlignment(Qt.AlignmentFlag.AlignTop)
+        self.vbox.addWidget(self.tasklist)
 
         self.setLayout(self.vbox)
 
