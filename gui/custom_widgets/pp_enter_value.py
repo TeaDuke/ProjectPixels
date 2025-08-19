@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QWidget, QLabel, QHBoxLayout, QGridLayout
+from PyQt6.QtWidgets import QWidget, QLabel, QGridLayout
 
 from consts import *
 from gui.custom_widgets.pp_line_edit import PPLineEdit

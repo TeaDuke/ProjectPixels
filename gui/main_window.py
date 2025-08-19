@@ -1,24 +1,15 @@
 from PyQt6.QtCore import Qt, pyqtSignal
-from PyQt6.QtGui import QPalette, QColor, QIcon
-from PyQt6.QtWidgets import QWidget, QMainWindow, QVBoxLayout, QSizePolicy, QTabBar, QPushButton, QComboBox, \
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QSizePolicy, \
     QHBoxLayout, QFrame
 
 from consts import BACKGROUND, BACKGROUND_LIGHTER
-from enums.status_enum import StatusEnum
 from gui.custom_widgets.pp_button import PPButton
-from gui.custom_widgets.pp_checker import PPChecker
 from gui.custom_widgets.pp_dropdown import PPDropDown
-from gui.custom_widgets.pp_enter_value import PPEnterValue
 from gui.custom_widgets.pp_icon_button import PPIconButton
-from gui.custom_widgets.pp_info import PPInfo
-from gui.custom_widgets.pp_line_edit import PPLineEdit
-from gui.custom_widgets.pp_status_bar import PPStatusBar
 from gui.pixels_info import PixelsInfo
 from gui.settings import Settings
 from gui.task_list import TaskList
 from services.base_main_service import BaseMainService
-from utilits.image_utilits import resource_path
-
 
 class MainWindow(QWidget):
 

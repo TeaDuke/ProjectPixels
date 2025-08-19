@@ -1,6 +1,6 @@
-from PyQt6.QtCore import Qt, QSize, pyqtSignal
-from PyQt6.QtGui import QPixmap, QIcon
-from PyQt6.QtWidgets import QWidget, QLabel, QVBoxLayout, QGridLayout, QSizePolicy, QPushButton, QHBoxLayout, \
+from PyQt6.QtCore import Qt, pyqtSignal
+from PyQt6.QtGui import QPixmap
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QSizePolicy, QHBoxLayout, \
     QMessageBox
 
 from consts import BACKGROUND_DARKER, BACKGROUND
@@ -11,7 +11,6 @@ from gui.custom_widgets.scalable_label import ScalableLabel
 from gui.custom_widgets.pp_status_bar import PPStatusBar
 from services.picture_main_service import PictureMainService
 from services.save_main_service import SaveMainService
-from utilits.image_utilits import resource_path
 
 
 class PictureInfo(QWidget):

@@ -1,6 +1,6 @@
 from PyQt6.QtCore import Qt, QRect
 from PyQt6.QtGui import QPainter, QColor, QFont
-from PyQt6.QtWidgets import QPushButton, QSizePolicy
+from PyQt6.QtWidgets import QPushButton
 
 import consts
 from consts import *

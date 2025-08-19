@@ -1,5 +1,5 @@
 from PyQt6.QtCore import pyqtSignal
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QGridLayout, QLineEdit, QHBoxLayout, QPushButton
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QGridLayout, QHBoxLayout
 
 from data_classes.Task import Task
 from gui.custom_widgets.pp_button import PPButton

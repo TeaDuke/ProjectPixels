@@ -1,5 +1,5 @@
 from PyQt6.QtCore import QTimer, Qt, pyqtSignal
-from PyQt6.QtWidgets import QWidget, QLabel, QHBoxLayout, QSizePolicy
+from PyQt6.QtWidgets import QWidget, QLabel
 
 from consts import *
 from enums.status_enum import StatusEnum

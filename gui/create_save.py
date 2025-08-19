@@ -1,9 +1,6 @@
-import os
-
-import psutil
 from PyQt6.QtCore import Qt, pyqtSignal
 from PyQt6.QtGui import QPixmap, QImage
-from PyQt6.QtWidgets import QWidget, QLineEdit, QPushButton, QLabel, QVBoxLayout, QHBoxLayout, QScrollArea, QSizePolicy, \
+from PyQt6.QtWidgets import QWidget, QLabel, QVBoxLayout, QHBoxLayout, QScrollArea, \
     QFileDialog, QGridLayout
 
 from consts import BACKGROUND, BACKGROUND_DARKER, TEXT, TEXT_SIZE

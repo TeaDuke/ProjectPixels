@@ -1,6 +1,6 @@
 from PyQt6.QtCore import Qt, QPoint, pyqtSignal
 from PyQt6.QtGui import QIcon, QAction
-from PyQt6.QtWidgets import QComboBox, QWidget, QMenu, QHBoxLayout, QSizePolicy
+from PyQt6.QtWidgets import QWidget, QMenu, QHBoxLayout, QSizePolicy
 from consts import *
 from gui.custom_widgets.pp_button import PPButton
 from utilits.image_utilits import resource_path

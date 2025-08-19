@@ -1,8 +1,7 @@
 from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QPushButton, QHBoxLayout, QGridLayout, QLabel, QComboBox
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QGridLayout, QLabel
 
 from consts import TEXT, TEXT_SIZE
-from data_services.save_data_service import SaveDataService
 from gui.custom_widgets.pp_button import PPButton
 from gui.custom_widgets.pp_dropdown import PPDropDown
 from services.save_main_service import SaveMainService

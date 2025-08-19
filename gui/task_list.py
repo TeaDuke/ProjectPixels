@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QGridLayout, QPushButton, QSizePolicy
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QGridLayout,  QSizePolicy
 from PyQt6.QtCore import pyqtSignal, Qt
 
 from consts import BACKGROUND_DARKER
@@ -51,7 +51,7 @@ class TaskList(QWidget):
         self.save_btn.setText("Save tasks")
         self.save_btn.clicked.connect(self.save_tasks)
         self.save_btn.setSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Maximum)
-        self.create_btn.setText("Add task")
+        self.create_btn.setText("Create task")
         self.create_btn.clicked.connect(self.open_task_creator)
         self.create_btn.setSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Maximum)
         self.change_checker.clicked.connect(self.change_mode)

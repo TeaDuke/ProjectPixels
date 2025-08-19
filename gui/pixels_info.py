@@ -1,5 +1,5 @@
 from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QWidget, QLabel, QVBoxLayout, QHBoxLayout, QGridLayout, QPushButton, QSizePolicy, \
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QSizePolicy, \
     QFileDialog
 
 from gui.custom_widgets.pp_button import PPButton
