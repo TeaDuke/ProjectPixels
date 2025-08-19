@@ -5,15 +5,37 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6d03fced-13b4-4431-b900-ce0971b747de" name="Changes" comment="finish main window, started picture info window">
+      <change afterPath="$PROJECT_DIR$/images/cog.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/trash.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/base.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/base.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chevron-left old.svg" beforeDir="false" afterPath="$PROJECT_DIR$/images/check.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chevron-right old.svg" beforeDir="false" afterPath="$PROJECT_DIR$/images/chevron-down.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/download (1).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/download (2).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/download (3).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/download.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/gui/create_save.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/create_save.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/custom_widgets/pp_status_bar.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/custom_widgets/pp_status_bar.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/main_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/main_window.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/picture_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/picture_info.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/pixels_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/pixels_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/custom_widgets/badge_button.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/custom_widgets/pp_dropdown.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/custom_widgets/pp_dropdown.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/custom_widgets/pp_icon_button.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/custom_widgets/pp_icon_button.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/custom_widgets/status_label.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/gui/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/services/picture_main_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/services/picture_main_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/task_list.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/task_list.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/chevron-left.svg" beforeDir="false" afterPath="$PROJECT_DIR$/images/chevron-left.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/chevron-right.svg" beforeDir="false" afterPath="$PROJECT_DIR$/images/chevron-right.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/log.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/log1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logo-for-task-tracker-app--.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources.qrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utilits/ghibli.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utilits/palette_utilit.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utilits/pimg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utilits/ppicture_utilit.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utilits/ppimg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utilits/tasks.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utilits/test.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,20 +70,20 @@
     "Python.pickle_utilit.executor": "Run",
     "Python.picture_data_service.executor": "Debug",
     "Python.ppicture_utilit.executor": "Run",
-    "Python.start.executor": "Run",
+    "Python.start.executor": "Debug",
     "Python.task_list.executor": "Run",
     "Python.test.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/maxch/Documents/projects/ProjectPixels",
+    "last_opened_file_path": "C:/Users/maxch/Documents/projects/ProjectPixels/images",
     "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\maxch\Documents\projects\ProjectPixels" />
       <recent name="C:\Users\maxch\Documents\projects\ProjectPixels\images" />
+      <recent name="C:\Users\maxch\Documents\projects\ProjectPixels" />
       <recent name="C:\Users\maxch\Documents\projects\ProjectPixels\data\Hollow\pictures\1" />
       <recent name="C:\Users\maxch\Documents\projects\ProjectPixels\services" />
       <recent name="C:\Users\maxch\Documents\projects\ProjectPixels\utilits" />
@@ -341,6 +363,11 @@
           <url>file://$PROJECT_DIR$/services/picture_main_service.py</url>
           <line>21</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/gui/custom_widgets/pp_dropdown.py</url>
+          <line>90</line>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

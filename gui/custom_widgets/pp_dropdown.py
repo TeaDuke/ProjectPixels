@@ -26,7 +26,7 @@ class PPDropDown (QWidget):
 
     def _settings(self):
 
-        self.pp_btn.setIcon(QIcon(resource_path("chevron-down.svg")))
+        self.pp_btn.setIcon(QIcon(resource_path("images\\chevron-down.svg")))
         self.pp_btn.setLayoutDirection(Qt.LayoutDirection.RightToLeft)
         self.pp_btn.setSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Maximum)
         self.pp_btn.clicked.connect(self.show_menu)
@@ -65,9 +65,10 @@ class PPDropDown (QWidget):
 
     def set_items(self, items):
         self.items = items
+        self.actions = []
         for item in items:
             action = QAction(item, self)
-            action.setIcon(QIcon(resource_path("check.svg")))
+            action.setIcon(QIcon(resource_path("images\\check.svg")))
             action.setIconVisibleInMenu(False)
 
             action.triggered.connect(lambda checked, text=item: self.select_item(text))
@@ -93,7 +94,7 @@ class PPDropDown (QWidget):
             action.setIconVisibleInMenu(False)
             emit = True
         self.selected_text = text
-        action_ = self.actions[self._find_index_by_text(text)]
+        action_ = self.actions[self._find_index_by_text(self.selected_text)]
         action_.setIconVisibleInMenu(True)
         self.pp_btn.setText(self.selected_text)
         if emit:

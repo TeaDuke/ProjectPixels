@@ -1,6 +1,0 @@
-<!DOCTYPE RCC><RCC version="1.0">
-<qresource prefix=":">
-    <file>images/chevron-left.svg</file>
-    <file>images/chevron-right.svg</file>
-</qresource>
-</RCC>

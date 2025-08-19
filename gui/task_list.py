@@ -4,7 +4,6 @@ from PyQt6.QtCore import pyqtSignal, Qt
 from consts import BACKGROUND_DARKER
 from data_classes.Task import Task
 from enums.mode_enum import ModeEnum
-from gui.custom_widgets.badge_button import BadgeButton
 from gui.custom_widgets.pp_button import PPButton
 from gui.custom_widgets.pp_checker import PPChecker
 from gui.task_changer import TaskChanger
@@ -12,7 +11,6 @@ from gui.task_creator import TaskCreator
 from services.picture_main_service import PictureMainService
 from services.task_main_service import TaskMainService
 from utilits.layout_utilit import clear_layout
-from utilits.palette_utilit import get_palette
 
 
 class TaskList(QWidget):

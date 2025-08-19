@@ -62,7 +62,7 @@ class CreateSave(QWidget):
         self.scroll_area.setMinimumHeight(self.height()-100)
         self.scroll_area.setMinimumWidth(200)
 
-        self.pixmap = QPixmap.fromImage(QImage(resource_path("logo.png")))
+        self.pixmap = QPixmap.fromImage(QImage(resource_path("images\\logo.png")))
         # self.pixmap = self.pixmap.scaled(200, 200, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
         self.logo.setPixmap(self.pixmap)
         self.logo.setMaximumHeight(200)

@@ -14,7 +14,6 @@ class Settings(QWidget):
         super().__init__()
 
         self.opening_mode_lbl = QLabel()
-        self.opening_mode_combo = QComboBox()
         self.opening_mode_dd = PPDropDown()
 
         self.save_btn = PPButton(self, "default")
@@ -33,7 +32,6 @@ class Settings(QWidget):
     def settings(self):
 
         self.opening_mode_lbl.setText("Opening mode:")
-        self.opening_mode_combo.addItems(["line", "random"])
         self.opening_mode_dd.set_items(["line", "random"])
 
         self.save_btn.setText("Save")

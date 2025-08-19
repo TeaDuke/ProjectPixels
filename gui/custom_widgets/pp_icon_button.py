@@ -71,13 +71,13 @@ class PPIconButton(QPushButton):
 
     def _update_icon(self):
         if self.icon_type == "left":
-            self.setIcon(QIcon(resource_path("chevron-left.svg")))
+            self.setIcon(QIcon(resource_path("images\\chevron-left.svg")))
         elif self.icon_type == "right":
-            self.setIcon(QIcon(resource_path("chevron-right.svg")))
+            self.setIcon(QIcon(resource_path("images\\chevron-right.svg")))
         elif self.icon_type == "delete":
-            self.setIcon(QIcon(resource_path("trash.svg")))
+            self.setIcon(QIcon(resource_path("images\\trash.svg")))
         elif self.icon_type == "settings":
-            self.setIcon(QIcon(resource_path("cog.svg")))
+            self.setIcon(QIcon(resource_path("images\\cog.svg")))
         self.setIconSize(QSize(24,24))
 
     def resizeEvent(self, event):
