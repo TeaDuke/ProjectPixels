@@ -24,9 +24,10 @@ Users do routine and paint a picture. Step by step.
 
 ## Release
 
-[![Download](https://img.shields.io/github/v/release/username/repo?label=Download)](https://github.com/TeaDuke/ProjectPixels/releases/latest)
+[Download latest release](https://github.com/TeaDuke/ProjectPixels/releases/latest)
 
 ## People
 
 Developed and designed by [TeaDuke](https://github.com/TeaDuke)
+
 Tested by [tsaplia](https://github.com/tsaplia) and 
